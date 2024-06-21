@@ -1,1 +1,89 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --primary-color: #0d9fee;
+    --secondary-color: #69facb;
+    --accent-color: gold;
+}
+.navbar {
+    background-color: var(--primary-color);
+}
+.footer {
+    background-color: var(--primary-color);
+}
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.btn-primary:hover {
+    background-color: #0a7bc9;
+    border-color: #0a7bc9;
+}
+.list-group-item.active {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+.card-title {
+    color: var(--primary-color);
+}
+.badge-primary {
+    background-color: var(--primary-color);
+}
+.modal-header {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+.modal-title {
+    color: #fff;
+}
+.footer-link {
+    color: #fff;
+    text-decoration: none;
+}
+.footer-link:hover {
+    color: #69facb;
+    text-decoration: underline;
+}
+.card {
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 0 20px var(--accent-color);
+    transform: translateY(-5px);
+}
+
+@keyframes jump {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.btn-primary {
+    transition: transform 0.3s ease;
+}
+
+.btn-primary:hover {
+    animation: jump 0.7s infinite;
+}
+
+.list-group-item.active {
+    background-color: #0d9fee;
+    border-color: #0d9fee;
+    color: #fff;
+}
+
+.product-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.product-item.show {
+    opacity: 1;
+    transform: translateY(0);
+}
