@@ -5,6 +5,8 @@ import { isPlatformBrowser } from '@angular/common';
 interface Usuario {
   email: string;
   nombre: string;
+  celular: string;
+  fechaNacimiento: string;
   rol: string;
 }
 
@@ -31,11 +33,28 @@ export class AuthService {
     return this.usuarioActual.asObservable();
   }
 
-  login(usuario: Usuario) {
+  login(email: string, password: string): boolean {
     if (this.isBrowser) {
-      localStorage.setItem('sesionUsuario', JSON.stringify(usuario));
+      const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+      const usuarioEncontrado = usuarios.find(
+        (usuario: any) => usuario.email === email && usuario.password === password
+      );
+
+      if (usuarioEncontrado) {
+        const usuarioSinContraseña: Usuario = {
+          email: usuarioEncontrado.email,
+          nombre: usuarioEncontrado.nombre,
+          celular: usuarioEncontrado.celular,
+          fechaNacimiento: usuarioEncontrado.fechaNacimiento,
+          rol: usuarioEncontrado.rol,
+        };
+
+        localStorage.setItem('sesionUsuario', JSON.stringify(usuarioSinContraseña));
+        this.usuarioActual.next(usuarioSinContraseña);
+        return true;
+      }
     }
-    this.usuarioActual.next(usuario);
+    return false;
   }
 
   logout() {
