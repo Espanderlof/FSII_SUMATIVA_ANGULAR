@@ -1,5 +1,5 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 
 interface Usuario {
@@ -36,6 +36,10 @@ export class AuthService {
     }
     return null;
   }
+
+  getUsuarioActualObservable(): Observable<Usuario | null> {
+    return this.usuarioActual.asObservable();
+  } 
 
   login(email: string, password: string): boolean {
     if (this.isBrowser) {

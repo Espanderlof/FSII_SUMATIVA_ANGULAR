@@ -4,6 +4,7 @@ import { CartService } from './services/cart.service';
 import { AuthService } from './services/auth.service';
 import { CommonModule } from '@angular/common';
 import { DataInitializationService } from './services/data-initialization.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit {
   title = 'albavets';
   cartItemCount: number = 0;
   usuarioActual: any = null;
+  private userSubscription: Subscription | undefined;
 
   constructor(
     private cartService: CartService,
@@ -34,11 +36,17 @@ export class AppComponent implements OnInit {
       this.cartService.getCartItemCount().subscribe(count => {
         this.cartItemCount = count;
       });
-      const usuario = this.authService.getUsuarioActual();
-      if (usuario) {
+      
+      this.userSubscription = this.authService.getUsuarioActualObservable().subscribe(usuario => {
         this.usuarioActual = usuario;
-      }
+      });
     });
+  }
+
+  ngOnDestroy() {
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
   }
 
   logout() {
