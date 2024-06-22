@@ -81,4 +81,32 @@ export class AuthService {
     }
     return false;
   }
+
+  generarTokenRecuperacion(email: string): string | null {
+    if (this.isBrowser) {
+      const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+      const usuario = usuarios.find((u: any) => u.email === email);
+      if (usuario) {
+        const token = Math.floor(Math.random() * 900000) + 100000;
+        usuario.token = token.toString();
+        localStorage.setItem('usuarios', JSON.stringify(usuarios));
+        return token.toString();
+      }
+    }
+    return null;
+  }
+
+  recuperarPassword(email: string, token: string, newPassword: string): boolean {
+    if (this.isBrowser) {
+      const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+      const usuario = usuarios.find((u: any) => u.email === email && u.token === token);
+      if (usuario) {
+        usuario.password = newPassword;
+        usuario.token = '';
+        localStorage.setItem('usuarios', JSON.stringify(usuarios));
+        return true;
+      }
+    }
+    return false;
+  }
 }
