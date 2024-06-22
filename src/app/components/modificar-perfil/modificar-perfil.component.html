@@ -1,1 +1,72 @@
-<p>modificar-perfil works!</p>
+<div class="container mt-4 mb-4">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Modificar información personal</h2>
+            <form [formGroup]="perfilForm" (ngSubmit)="onSubmitPerfil()">
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" formControlName="nombre" required
+                        [ngClass]="{'is-invalid': perfilForm.get('nombre')?.invalid && perfilForm.get('nombre')?.touched}">
+                    <div class="invalid-feedback" *ngIf="perfilForm.get('nombre')?.errors?.['required']">
+                        El nombre es requerido.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="celular" class="form-label">Celular</label>
+                    <input type="tel" class="form-control" id="celular" formControlName="celular" required
+                        [ngClass]="{'is-invalid': perfilForm.get('celular')?.invalid && perfilForm.get('celular')?.touched}">
+                    <div class="invalid-feedback" *ngIf="perfilForm.get('celular')?.errors?.['required']">
+                        El celular es requerido.
+                    </div>
+                    <div class="invalid-feedback" *ngIf="perfilForm.get('celular')?.errors?.['pattern']">
+                        El celular debe contener 9 dígitos numéricos.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="fechaNacimiento" class="form-label">Fecha de nacimiento</label>
+                    <input type="date" class="form-control" id="fechaNacimiento" formControlName="fechaNacimiento"
+                        [ngClass]="{'is-invalid': perfilForm.get('fechaNacimiento')?.invalid && perfilForm.get('fechaNacimiento')?.touched}">
+                    <div class="invalid-feedback" *ngIf="perfilForm.get('fechaNacimiento')?.errors?.['required']">
+                        La fecha de nacimiento es requerida.
+                    </div>
+                    <div class="invalid-feedback" *ngIf="perfilForm.get('fechaNacimiento')?.errors?.['edadMinima']">
+                        Debes ser mayor de 14 años para modificar tu perfil.
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" [disabled]="perfilForm.invalid">Guardar cambios</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h2>Modificar contraseña</h2>
+            <form [formGroup]="passwordForm" (ngSubmit)="onSubmitPassword()">
+                <div class="mb-3">
+                    <label for="newPassword" class="form-label">Nueva contraseña</label>
+                    <input type="password" class="form-control" id="newPassword" formControlName="newPassword" required
+                        [ngClass]="{'is-invalid': passwordForm.get('newPassword')?.invalid && passwordForm.get('newPassword')?.touched}">
+                    <div class="invalid-feedback" *ngIf="passwordForm.get('newPassword')?.errors?.['required']">
+                        La nueva contraseña es requerida.
+                    </div>
+                    <div class="invalid-feedback" *ngIf="passwordForm.get('newPassword')?.errors?.['pattern']">
+                        La contraseña debe tener entre 6 y 15 caracteres, y contener al menos un número, una letra
+                        minúscula, una letra mayúscula y un carácter especial.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">Repetir nueva contraseña</label>
+                    <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword"
+                        required
+                        [ngClass]="{'is-invalid': (passwordForm.get('confirmPassword')?.invalid || passwordForm.hasError('mismatch')) && passwordForm.get('confirmPassword')?.touched}">
+                    <div class="invalid-feedback" *ngIf="passwordForm.get('confirmPassword')?.errors?.['required']">
+                        Debe repetir la contraseña.
+                    </div>
+                    <div class="invalid-feedback"
+                        *ngIf="passwordForm.hasError('mismatch') && !passwordForm.get('confirmPassword')?.errors?.['required']">
+                        Las contraseñas no coinciden.
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" [disabled]="passwordForm.invalid">Cambiar
+                    contraseña</button>
+            </form>
+        </div>
+    </div>
+</div>

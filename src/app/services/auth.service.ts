@@ -29,8 +29,12 @@ export class AuthService {
     }
   }
 
-  getUsuarioActual() {
-    return this.usuarioActual.asObservable();
+  getUsuarioActual(): any {
+    if (this.isBrowser) {
+      const sesionUsuarioJSON = localStorage.getItem('sesionUsuario');
+      return sesionUsuarioJSON ? JSON.parse(sesionUsuarioJSON) : null;
+    }
+    return null;
   }
 
   login(email: string, password: string): boolean {
@@ -109,4 +113,61 @@ export class AuthService {
     }
     return false;
   }
+
+  actualizarPerfil(datosActualizados: any): boolean {
+    if (this.isBrowser) {
+      const usuariosJSON = localStorage.getItem('usuarios');
+      if (usuariosJSON) {
+        let usuarios = JSON.parse(usuariosJSON);
+        const sesionUsuario = this.getUsuarioActual();
+
+        if (sesionUsuario) {
+          // Actualizar el usuario en el array de usuarios
+          usuarios = usuarios.map((usuario: any) => {
+            if (usuario.email === sesionUsuario.email) {
+              return { ...usuario, ...datosActualizados };
+            }
+            return usuario;
+          });
+
+          // Actualizar el localStorage
+          localStorage.setItem('usuarios', JSON.stringify(usuarios));
+
+          // Actualizar la sesión del usuario
+          const usuarioActualizado = { ...sesionUsuario, ...datosActualizados };
+          localStorage.setItem('sesionUsuario', JSON.stringify(usuarioActualizado));
+
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  actualizarContraseña(newPassword: string): boolean {
+    if (this.isBrowser) {
+      const usuariosJSON = localStorage.getItem('usuarios');
+      if (usuariosJSON) {
+        let usuarios = JSON.parse(usuariosJSON);
+        const sesionUsuario = this.getUsuarioActual();
+
+        if (sesionUsuario) {
+          // Actualizar la contraseña del usuario en el array de usuarios
+          usuarios = usuarios.map((usuario: any) => {
+            if (usuario.email === sesionUsuario.email) {
+              return { ...usuario, password: newPassword };
+            }
+            return usuario;
+          });
+
+          // Actualizar el localStorage
+          localStorage.setItem('usuarios', JSON.stringify(usuarios));
+
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
 }

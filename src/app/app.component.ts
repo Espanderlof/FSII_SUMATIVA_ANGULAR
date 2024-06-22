@@ -34,9 +34,10 @@ export class AppComponent implements OnInit {
       this.cartService.getCartItemCount().subscribe(count => {
         this.cartItemCount = count;
       });
-      this.authService.getUsuarioActual().subscribe(usuario => {
+      const usuario = this.authService.getUsuarioActual();
+      if (usuario) {
         this.usuarioActual = usuario;
-      });
+      }
     });
   }
 
