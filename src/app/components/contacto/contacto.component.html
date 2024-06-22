@@ -1,1 +1,55 @@
-<p>contacto works!</p>
+<div class="container mt-4 mb-4">
+    <h2>Formulario de contacto</h2>
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" formControlName="nombre"
+                [ngClass]="{ 'is-invalid': submitted && f['nombre'].errors }">
+            <div *ngIf="submitted && f['nombre'].errors" class="invalid-feedback">
+                <div *ngIf="f['nombre'].errors['required']">El nombre es requerido</div>
+                <div *ngIf="f['nombre'].errors['minlength']">El nombre debe tener al menos 2 caracteres</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" id="email" formControlName="email"
+                [ngClass]="{ 'is-invalid': submitted && f['email'].errors }">
+            <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                <div *ngIf="f['email'].errors['required']">El email es requerido</div>
+                <div *ngIf="f['email'].errors['email']">Debe ser una dirección de email válida</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="celular" class="form-label">Celular</label>
+            <input type="tel" class="form-control" id="celular" formControlName="celular"
+                [ngClass]="{ 'is-invalid': submitted && f['celular'].errors }">
+            <div *ngIf="submitted && f['celular'].errors" class="invalid-feedback">
+                <div *ngIf="f['celular'].errors['required']">El número de celular es requerido</div>
+                <div *ngIf="f['celular'].errors['pattern']">Debe ser un número de 9 dígitos</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="asunto" class="form-label">Asunto</label>
+            <input type="text" class="form-control" id="asunto" formControlName="asunto"
+                [ngClass]="{ 'is-invalid': submitted && f['asunto'].errors }">
+            <div *ngIf="submitted && f['asunto'].errors" class="invalid-feedback">
+                <div *ngIf="f['asunto'].errors['required']">El asunto es requerido</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="mensaje" class="form-label">Mensaje</label>
+            <textarea class="form-control" id="mensaje" rows="5" formControlName="mensaje"
+                [ngClass]="{ 'is-invalid': submitted && f['mensaje'].errors }"></textarea>
+            <div *ngIf="submitted && f['mensaje'].errors" class="invalid-feedback">
+                <div *ngIf="f['mensaje'].errors['required']">El mensaje es requerido</div>
+                <div *ngIf="f['mensaje'].errors['minlength']">El mensaje debe tener al menos 10 caracteres</div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+</div>
