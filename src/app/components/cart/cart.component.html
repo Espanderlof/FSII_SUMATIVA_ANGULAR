@@ -1,1 +1,31 @@
-<p>cart works!</p>
+<div class="container mt-4 mb-4">
+    <h2>Carrito de compras</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of cartItems">
+                <td>{{ item.nombre }}</td>
+                <td>${{ item.precio }}</td>
+                <td>
+                    <input type="number" class="form-control cantidad-input" [(ngModel)]="item.cantidad"
+                        (change)="updateCartItemQuantity(item)" min="1">
+                </td>
+                <td>${{ item.precio * item.cantidad }}</td>
+                <td>
+                    <button class="btn btn-danger eliminar-btn" (click)="removeCartItem(item.id)">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="text-end">
+        <h4>Total: ${{ total }}</h4>
+    </div>
+</div>
