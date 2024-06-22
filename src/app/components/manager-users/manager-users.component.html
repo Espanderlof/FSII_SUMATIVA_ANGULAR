@@ -1,1 +1,99 @@
-<p>manager-users works!</p>
+<div class="container mt-4 mb-4">
+    <h2>Administrar usuarios</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Nombre</th>
+          <th>Celular</th>
+          <th>Fecha de nacimiento</th>
+          <th>Rol</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarios">
+          <td>{{ usuario.email }}</td>
+          <td>{{ usuario.nombre }}</td>
+          <td>{{ usuario.celular }}</td>
+          <td>{{ usuario.fechaNacimiento }}</td>
+          <td>{{ usuario.rol }}</td>
+          <td>
+            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal" (click)="editUser(usuario)">Editar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Modal de edición de usuario -->
+    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editUserModalLabel">Editar usuario</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" formControlName="email"
+                       [ngClass]="{'is-invalid': editForm.get('email')?.invalid && editForm.get('email')?.touched}">
+                <div class="invalid-feedback" *ngIf="editForm.get('email')?.errors?.['required']">
+                  El email es requerido.
+                </div>
+                <div class="invalid-feedback" *ngIf="editForm.get('email')?.errors?.['email']">
+                  Ingrese un email válido.
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" formControlName="nombre"
+                       [ngClass]="{'is-invalid': editForm.get('nombre')?.invalid && editForm.get('nombre')?.touched}">
+                <div class="invalid-feedback" *ngIf="editForm.get('nombre')?.errors?.['required']">
+                  El nombre es requerido.
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="celular" class="form-label">Celular</label>
+                <input type="tel" class="form-control" id="celular" formControlName="celular"
+                       [ngClass]="{'is-invalid': editForm.get('celular')?.invalid && editForm.get('celular')?.touched}">
+                <div class="invalid-feedback" *ngIf="editForm.get('celular')?.errors?.['required']">
+                  El celular es requerido.
+                </div>
+                <div class="invalid-feedback" *ngIf="editForm.get('celular')?.errors?.['pattern']">
+                  El celular debe contener 9 dígitos numéricos.
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="fechaNacimiento" class="form-label">Fecha de nacimiento</label>
+                <input type="date" class="form-control" id="fechaNacimiento" formControlName="fechaNacimiento"
+                       [ngClass]="{'is-invalid': editForm.get('fechaNacimiento')?.invalid && editForm.get('fechaNacimiento')?.touched}">
+                <div class="invalid-feedback" *ngIf="editForm.get('fechaNacimiento')?.errors?.['required']">
+                  La fecha de nacimiento es requerida.
+                </div>
+                <div class="invalid-feedback" *ngIf="editForm.get('fechaNacimiento')?.errors?.['edadMinima']">
+                  El usuario debe ser mayor de 14 años.
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="rol" class="form-label">Rol</label>
+                <select class="form-select" id="rol" formControlName="rol"
+                        [ngClass]="{'is-invalid': editForm.get('rol')?.invalid && editForm.get('rol')?.touched}">
+                  <option value="usuario">Usuario</option>
+                  <option value="administrador">Administrador</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="editForm.get('rol')?.errors?.['required']">
+                  El rol es requerido.
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" (click)="onSubmit()">Guardar cambios</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

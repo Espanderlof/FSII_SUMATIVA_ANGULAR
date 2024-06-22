@@ -3,7 +3,7 @@
       {
         "email": "admin@albavets.cl",
         "nombre": "Administrador",
-        "celular": "+56912345678",
+        "celular": "912345678",
         "password": "Admin123!",
         "fechaNacimiento": "1990-01-01",
         "rol": "administrador",
@@ -12,7 +12,7 @@
       {
         "email": "jperez@gmail.com",
         "nombre": "Juan Perez",
-        "celular": "+56987654321",
+        "celular": "987654321",
         "password": "Usuario1!",
         "fechaNacimiento": "1985-05-10",
         "rol": "usuario",
@@ -21,7 +21,7 @@
       {
         "email": "mgomez@gmail.com",
         "nombre": "Maria Gomez",
-        "celular": "+56955555555",
+        "celular": "955555555",
         "password": "Usuario2!",
         "fechaNacimiento": "1992-12-20",
         "rol": "usuario",

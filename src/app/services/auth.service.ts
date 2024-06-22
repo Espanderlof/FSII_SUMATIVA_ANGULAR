@@ -39,7 +39,7 @@ export class AuthService {
 
   getUsuarioActualObservable(): Observable<Usuario | null> {
     return this.usuarioActual.asObservable();
-  } 
+  }
 
   login(email: string, password: string): boolean {
     if (this.isBrowser) {
@@ -169,6 +169,27 @@ export class AuthService {
 
           return true;
         }
+      }
+    }
+    return false;
+  }
+
+  getUsuarios(): any[] {
+    if (this.isBrowser) {
+      const usuariosJSON = localStorage.getItem('usuarios');
+      return usuariosJSON ? JSON.parse(usuariosJSON) : [];
+    }
+    return [];
+  }
+
+  actualizarUsuario(usuario: any): boolean {
+    if (this.isBrowser) {
+      let usuarios = this.getUsuarios();
+      const index = usuarios.findIndex(u => u.email === usuario.email);
+      if (index !== -1) {
+        usuarios[index] = usuario;
+        localStorage.setItem('usuarios', JSON.stringify(usuarios));
+        return true;
       }
     }
     return false;
