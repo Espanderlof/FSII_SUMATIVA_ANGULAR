@@ -3,6 +3,7 @@ import { RouterLink, RouterModule, RouterOutlet, RouterLinkActive } from '@angul
 import { CartService } from './services/cart.service';
 import { AuthService } from './services/auth.service';
 import { CommonModule } from '@angular/common';
+import { DataInitializationService } from './services/data-initialization.service';
 
 @Component({
   selector: 'app-root',
@@ -24,15 +25,18 @@ export class AppComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
-    private authService: AuthService
+    private authService: AuthService,
+    private dataInitService: DataInitializationService
   ) {}
 
   ngOnInit() {
-    this.cartService.getCartItemCount().subscribe(count => {
-      this.cartItemCount = count;
-    });
-    this.authService.getUsuarioActual().subscribe(usuario => {
-      this.usuarioActual = usuario;
+    this.dataInitService.initializeData().then(() => {
+      this.cartService.getCartItemCount().subscribe(count => {
+        this.cartItemCount = count;
+      });
+      this.authService.getUsuarioActual().subscribe(usuario => {
+        this.usuarioActual = usuario;
+      });
     });
   }
 
