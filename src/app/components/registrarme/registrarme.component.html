@@ -1,1 +1,74 @@
-<p>registrarme works!</p>
+<div class="container mt-4">
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-6">
+            <h2>Registro de usuario</h2>
+            <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo electrónico</label>
+                    <input type="email" class="form-control" id="email" formControlName="email"
+                        [ngClass]="{'is-invalid': registroForm.get('email')?.invalid && registroForm.get('email')?.touched}">
+                    <div class="invalid-feedback" *ngIf="registroForm.get('email')?.errors?.['required']">
+                        El correo electrónico es requerido.
+                    </div>
+                    <div class="invalid-feedback" *ngIf="registroForm.get('email')?.errors?.['email']">
+                        Ingrese un correo electrónico válido.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre completo</label>
+                    <input type="text" class="form-control" id="nombre" formControlName="nombre"
+                        [ngClass]="{'is-invalid': registroForm.get('nombre')?.invalid && registroForm.get('nombre')?.touched}">
+                    <div class="invalid-feedback" *ngIf="registroForm.get('nombre')?.errors?.['required']">
+                        El nombre es requerido.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="celular" class="form-label">Celular</label>
+                    <input type="tel" class="form-control" id="celular" formControlName="celular"
+                        [ngClass]="{'is-invalid': registroForm.get('celular')?.invalid && registroForm.get('celular')?.touched}">
+                    <div class="invalid-feedback" *ngIf="registroForm.get('celular')?.errors?.['required']">
+                        El celular es requerido.
+                    </div>
+                    <div class="invalid-feedback" *ngIf="registroForm.get('celular')?.errors?.['pattern']">
+                        El celular debe contener 9 dígitos numéricos.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="fechaNacimiento" class="form-label">Fecha de nacimiento</label>
+                    <input type="date" class="form-control" id="fechaNacimiento" formControlName="fechaNacimiento"
+                        [ngClass]="{'is-invalid': registroForm.get('fechaNacimiento')?.invalid && registroForm.get('fechaNacimiento')?.touched}">
+                    <div class="invalid-feedback" *ngIf="registroForm.get('fechaNacimiento')?.errors?.['required']">
+                        La fecha de nacimiento es requerida.
+                    </div>
+                    <div class="invalid-feedback" *ngIf="registroForm.get('fechaNacimiento')?.errors?.['edadMinima']">
+                        Debes ser mayor de 14 años para registrarte.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="password" formControlName="password"
+                        [ngClass]="{'is-invalid': registroForm.get('password')?.invalid && registroForm.get('password')?.touched}">
+                    <div class="invalid-feedback" *ngIf="registroForm.get('password')?.errors?.['required']">
+                        La contraseña es requerida.
+                    </div>
+                    <div class="invalid-feedback" *ngIf="registroForm.get('password')?.errors?.['pattern']">
+                        La contraseña debe tener entre 6 y 15 caracteres, y contener al menos un número, una letra
+                        minúscula, una letra mayúscula y un carácter especial.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="repetirPassword" class="form-label">Repetir contraseña</label>
+                    <input type="password" class="form-control" id="repetirPassword" formControlName="repetirPassword"
+                        [ngClass]="{'is-invalid': (registroForm.get('repetirPassword')?.invalid || registroForm.errors?.['mismatch']) && registroForm.get('repetirPassword')?.touched}">
+                    <div class="invalid-feedback" *ngIf="registroForm.get('repetirPassword')?.errors?.['required']">
+                        Debe repetir la contraseña.
+                    </div>
+                    <div class="invalid-feedback" *ngIf="registroForm.get('repetirPassword')?.errors?.['mismatch']">
+                        Las contraseñas no coinciden.
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Registrarme</button>
+            </form>
+        </div>
+    </div>
+</div>

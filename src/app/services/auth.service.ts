@@ -48,4 +48,18 @@ export class AuthService {
   esAdministrador(): boolean {
     return this.usuarioActual.value?.rol === 'administrador';
   }
+
+  registrarUsuario(nuevoUsuario: any): boolean {
+    if (this.isBrowser) {
+      let usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+      const usuarioExistente = usuarios.find((u: any) => u.email === nuevoUsuario.email);
+      if (usuarioExistente) {
+        return false;
+      }
+      usuarios.push(nuevoUsuario);
+      localStorage.setItem('usuarios', JSON.stringify(usuarios));
+      return true;
+    }
+    return false;
+  }
 }
