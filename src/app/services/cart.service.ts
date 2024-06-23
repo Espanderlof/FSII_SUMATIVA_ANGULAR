@@ -2,20 +2,37 @@ import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 
+/**
+ * Interfaz que define la estructura de un ítem del carrito
+ */
 interface CartItem {
+  /** ID del producto */
   id: number;
+  /** Nombre del producto */
   nombre: string;
+  /** Precio del producto */
   precio: number;
+  /** Cantidad de producto */
   cantidad: number;
 }
 
+/**
+ * @description
+ * Servicio para manejar las operaciones del carrito de compras
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+  /** BehaviorSubject para manejar el contador de ítems en el carrito */
   private cartItemCount = new BehaviorSubject<number>(0);
+  /** Indica si el código se está ejecutando en un navegador */
   private isBrowser: boolean;
 
+  /**
+   * Constructor del servicio
+   * @param platformId ID de la plataforma para determinar si es un navegador
+   */
   constructor(@Inject(PLATFORM_ID) platformId: Object) {
     this.isBrowser = isPlatformBrowser(platformId);
     if (this.isBrowser) {
@@ -23,6 +40,10 @@ export class CartService {
     }
   }
 
+  /**
+   * Obtiene los ítems del carrito
+   * @returns Array de ítems del carrito
+   */
   getCartItems(): CartItem[] {
     if (this.isBrowser) {
       return JSON.parse(localStorage.getItem('cart') || '[]');
@@ -30,6 +51,11 @@ export class CartService {
     return [];
   }  
 
+  /**
+   * Actualiza la cantidad de un ítem en el carrito
+   * @param productId ID del producto a actualizar
+   * @param quantity Nueva cantidad
+   */
   updateCartItemQuantity(productId: number, quantity: number) {
     if (this.isBrowser) {
       let cart = this.getCartItems();
@@ -42,6 +68,10 @@ export class CartService {
     }
   }
 
+ /**
+   * Elimina un ítem del carrito
+   * @param productId ID del producto a eliminar
+   */
   removeCartItem(productId: number) {
     if (this.isBrowser) {
       let cart = this.getCartItems();
@@ -51,6 +81,10 @@ export class CartService {
     }
   }
 
+  /**
+   * Añade un producto al carrito
+   * @param product Producto a añadir
+   */
   addToCart(product: any) {
     if (this.isBrowser) {
       let cart = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -68,6 +102,10 @@ export class CartService {
     }
   }
 
+  /**
+   * Actualiza el contador de ítems en el carrito
+   * @private
+   */
   private updateCartItemCount() {
     if (this.isBrowser) {
       const cart = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -76,6 +114,10 @@ export class CartService {
     }
   }
 
+  /**
+   * Obtiene un Observable del contador de ítems en el carrito
+   * @returns Observable del contador de ítems
+   */
   getCartItemCount() {
     return this.cartItemCount.asObservable();
   }

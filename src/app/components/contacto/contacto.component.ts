@@ -2,6 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+/**
+ * @description
+ * Componente para manejar el formulario de contacto
+ */
 @Component({
   selector: 'app-contacto',
   standalone: true,
@@ -10,11 +14,20 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
   styleUrl: './contacto.component.scss'
 })
 export class ContactoComponent implements OnInit {
+  /** Formulario de contacto */
   contactForm!: FormGroup;
+  /** Indica si el formulario ha sido enviado */
   submitted = false;
 
+  /**
+   * Constructor del componente
+   * @param formBuilder Servicio para construir formularios reactivos
+   */
   constructor(private formBuilder: FormBuilder) { }
 
+  /**
+   * Inicializa el componente y configura el formulario
+   */
   ngOnInit() {
     this.contactForm = this.formBuilder.group({
       nombre: ['', [Validators.required, Validators.minLength(2)]],
@@ -25,6 +38,9 @@ export class ContactoComponent implements OnInit {
     });
   }
 
+  /**
+   * Maneja el envío del formulario
+   */
   onSubmit() {
     this.submitted = true;
 
@@ -34,6 +50,10 @@ export class ContactoComponent implements OnInit {
       this.submitted = false;
     }
   }
-
+  
+  /**
+   * Getter para acceder fácilmente a los controles del formulario
+   * @returns Los controles del formulario
+   */
   get f() { return this.contactForm.controls; }
 }

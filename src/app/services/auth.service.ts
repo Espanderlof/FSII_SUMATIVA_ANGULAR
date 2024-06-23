@@ -2,26 +2,47 @@ import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 
+/**
+ * Interfaz que define la estructura de un usuario
+ */
 interface Usuario {
+  /** Email del usuario */
   email: string;
+  /** Nombre del usuario */
   nombre: string;
+  /** Celular del usuario */
   celular: string;
+  /** Fecha de nacimiento del usuario */
   fechaNacimiento: string;
+  /** Rol del usuario */
   rol: string;
 }
 
+/**
+ * @description
+ * Servicio para manejar la autenticación y gestión de usuarios
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  /** BehaviorSubject para manejar el usuario actual */
   private usuarioActual = new BehaviorSubject<Usuario | null>(null);
+  /** Indica si el código se está ejecutando en un navegador */
   private isBrowser: boolean;
 
+  /**
+   * Constructor del servicio
+   * @param platformId ID de la plataforma para determinar si es un navegador
+   */
   constructor(@Inject(PLATFORM_ID) platformId: Object) {
     this.isBrowser = isPlatformBrowser(platformId);
     this.cargarSesion();
   }
 
+  /**
+   * Carga la sesión del usuario desde el almacenamiento local
+   */
   cargarSesion() {
     if (this.isBrowser) {
       const sesionUsuario = JSON.parse(localStorage.getItem('sesionUsuario') || 'null');
@@ -29,6 +50,10 @@ export class AuthService {
     }
   }
 
+  /**
+   * Obtiene el usuario actual
+   * @returns El usuario actual o null si no hay sesión
+   */
   getUsuarioActual(): any {
     if (this.isBrowser) {
       const sesionUsuarioJSON = localStorage.getItem('sesionUsuario');
@@ -37,10 +62,20 @@ export class AuthService {
     return null;
   }
 
+  /**
+   * Obtiene un Observable del usuario actual
+   * @returns Observable del usuario actual
+   */
   getUsuarioActualObservable(): Observable<Usuario | null> {
     return this.usuarioActual.asObservable();
   }
 
+  /**
+   * Realiza el inicio de sesión de un usuario
+   * @param email Email del usuario
+   * @param password Contraseña del usuario
+   * @returns true si el login es exitoso, false en caso contrario
+   */
   login(email: string, password: string): boolean {
     if (this.isBrowser) {
       const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
@@ -65,6 +100,9 @@ export class AuthService {
     return false;
   }
 
+  /**
+   * Cierra la sesión del usuario actual
+   */
   logout() {
     if (this.isBrowser) {
       localStorage.removeItem('sesionUsuario');
@@ -72,10 +110,20 @@ export class AuthService {
     this.usuarioActual.next(null);
   }
 
+  /**
+   * Verifica si el usuario actual es administrador
+   * @returns true si el usuario es administrador, false en caso contrario
+   */
   esAdministrador(): boolean {
     return this.usuarioActual.value?.rol === 'administrador';
   }
 
+
+  /**
+   * Registra un nuevo usuario
+   * @param nuevoUsuario Datos del nuevo usuario
+   * @returns true si el registro es exitoso, false si el usuario ya existe
+   */
   registrarUsuario(nuevoUsuario: any): boolean {
     if (this.isBrowser) {
       let usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
@@ -90,6 +138,11 @@ export class AuthService {
     return false;
   }
 
+  /**
+   * Genera un token de recuperación para un email dado
+   * @param email Email del usuario
+   * @returns El token generado o null si el email no existe
+   */
   generarTokenRecuperacion(email: string): string | null {
     if (this.isBrowser) {
       const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
@@ -104,6 +157,13 @@ export class AuthService {
     return null;
   }
 
+  /**
+   * Recupera la contraseña de un usuario
+   * @param email Email del usuario
+   * @param token Token de recuperación
+   * @param newPassword Nueva contraseña
+   * @returns true si la recuperación es exitosa, false en caso contrario
+   */
   recuperarPassword(email: string, token: string, newPassword: string): boolean {
     if (this.isBrowser) {
       const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
@@ -118,6 +178,11 @@ export class AuthService {
     return false;
   }
 
+  /**
+   * Actualiza el perfil del usuario actual
+   * @param datosActualizados Nuevos datos del perfil
+   * @returns true si la actualización es exitosa, false en caso contrario
+   */
   actualizarPerfil(datosActualizados: any): boolean {
     if (this.isBrowser) {
       const usuariosJSON = localStorage.getItem('usuarios');
@@ -148,6 +213,11 @@ export class AuthService {
     return false;
   }
 
+  /**
+   * Actualiza la contraseña del usuario actual
+   * @param newPassword Nueva contraseña
+   * @returns true si la actualización es exitosa, false en caso contrario
+   */
   actualizarContraseña(newPassword: string): boolean {
     if (this.isBrowser) {
       const usuariosJSON = localStorage.getItem('usuarios');
@@ -174,6 +244,10 @@ export class AuthService {
     return false;
   }
 
+  /**
+   * Obtiene la lista de todos los usuarios
+   * @returns Array de usuarios
+   */
   getUsuarios(): any[] {
     if (this.isBrowser) {
       const usuariosJSON = localStorage.getItem('usuarios');
@@ -182,6 +256,11 @@ export class AuthService {
     return [];
   }
 
+  /**
+   * Actualiza los datos de un usuario
+   * @param usuario Datos actualizados del usuario
+   * @returns true si la actualización es exitosa, false en caso contrario
+   */
   actualizarUsuario(usuario: any): boolean {
     if (this.isBrowser) {
       let usuarios = this.getUsuarios();

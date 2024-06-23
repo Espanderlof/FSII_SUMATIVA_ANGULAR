@@ -4,6 +4,10 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractContro
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
+/**
+ * @description
+ * Componente para manejar el proceso de recuperación de contraseña
+ */
 @Component({
   selector: 'app-recuperar-password',
   standalone: true,
@@ -12,15 +16,26 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./recuperar-password.component.scss']
 })
 export class RecuperarPasswordComponent implements OnInit {
+  /** Formulario para ingresar el correo electrónico */
   emailForm!: FormGroup;
+  /** Formulario para ingresar el token y la nueva contraseña */
   passwordForm!: FormGroup;
 
+  /**
+   * Constructor del componente
+   * @param fb FormBuilder para crear los formularios reactivos
+   * @param authService Servicio de autenticación
+   * @param router Router para la navegación
+   */
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router
   ) { }
 
+  /**
+   * Inicializa el componente y configura los formularios
+   */
   ngOnInit() {
     this.emailForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]]
@@ -33,6 +48,11 @@ export class RecuperarPasswordComponent implements OnInit {
     }, { validators: this.passwordMatchValidator });
   }
 
+  /**
+   * Validador personalizado para verificar que las contraseñas coincidan
+   * @param control AbstractControl que contiene los campos de contraseña
+   * @returns Objeto con error si las contraseñas no coinciden, null si son iguales
+   */
   passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
     const newPassword = control.get('newPassword');
     const confirmPassword = control.get('confirmPassword');
@@ -45,7 +65,9 @@ export class RecuperarPasswordComponent implements OnInit {
       return null;
     }
   }
-
+  /**
+   * Genera y envía un token de recuperación al correo electrónico proporcionado
+   */
   generarToken() {
     if (this.emailForm.valid) {
       const email = this.emailForm.get('email')?.value;
@@ -60,6 +82,9 @@ export class RecuperarPasswordComponent implements OnInit {
     }
   }
 
+  /**
+   * Maneja el envío del formulario de recuperación de contraseña
+   */
   onSubmit() {
     if (this.passwordForm.valid) {
       const email = this.emailForm.get('email')?.value;

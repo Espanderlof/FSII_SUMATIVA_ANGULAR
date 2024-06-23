@@ -1,0 +1,1540 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>albavets documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">albavets documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >AuthService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/services/auth.service.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Servicio para manejar la autenticación y gestión de usuarios</p>
+
+            </p>
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#isBrowser" >isBrowser</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#usuarioActual" >usuarioActual</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#actualizarContraseña" >actualizarContraseña</a>
+                            </li>
+                            <li>
+                                <a href="#actualizarPerfil" >actualizarPerfil</a>
+                            </li>
+                            <li>
+                                <a href="#actualizarUsuario" >actualizarUsuario</a>
+                            </li>
+                            <li>
+                                <a href="#cargarSesion" >cargarSesion</a>
+                            </li>
+                            <li>
+                                <a href="#esAdministrador" >esAdministrador</a>
+                            </li>
+                            <li>
+                                <a href="#generarTokenRecuperacion" >generarTokenRecuperacion</a>
+                            </li>
+                            <li>
+                                <a href="#getUsuarioActual" >getUsuarioActual</a>
+                            </li>
+                            <li>
+                                <a href="#getUsuarioActualObservable" >getUsuarioActualObservable</a>
+                            </li>
+                            <li>
+                                <a href="#getUsuarios" >getUsuarios</a>
+                            </li>
+                            <li>
+                                <a href="#login" >login</a>
+                            </li>
+                            <li>
+                                <a href="#logout" >logout</a>
+                            </li>
+                            <li>
+                                <a href="#recuperarPassword" >recuperarPassword</a>
+                            </li>
+                            <li>
+                                <a href="#registrarUsuario" >registrarUsuario</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(platformId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank">Object</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/services/auth.service.ts:32</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Constructor del servicio</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>platformId</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank" >Object</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>ID de la plataforma para determinar si es un navegador</p>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="actualizarContraseña"></a>
+                    <span class="name">
+                        <span ><b>actualizarContraseña</b></span>
+                        <a href="#actualizarContraseña"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>actualizarContraseña(newPassword: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="221"
+                                    class="link-to-prism">src/app/services/auth.service.ts:221</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Actualiza la contraseña del usuario actual</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>newPassword</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Nueva contraseña</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>true si la actualización es exitosa, false en caso contrario</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="actualizarPerfil"></a>
+                    <span class="name">
+                        <span ><b>actualizarPerfil</b></span>
+                        <a href="#actualizarPerfil"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>actualizarPerfil(datosActualizados: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="186"
+                                    class="link-to-prism">src/app/services/auth.service.ts:186</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Actualiza el perfil del usuario actual</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>datosActualizados</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Nuevos datos del perfil</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>true si la actualización es exitosa, false en caso contrario</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="actualizarUsuario"></a>
+                    <span class="name">
+                        <span ><b>actualizarUsuario</b></span>
+                        <a href="#actualizarUsuario"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>actualizarUsuario(usuario: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="264"
+                                    class="link-to-prism">src/app/services/auth.service.ts:264</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Actualiza los datos de un usuario</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>usuario</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Datos actualizados del usuario</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>true si la actualización es exitosa, false en caso contrario</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cargarSesion"></a>
+                    <span class="name">
+                        <span ><b>cargarSesion</b></span>
+                        <a href="#cargarSesion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cargarSesion()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="46"
+                                    class="link-to-prism">src/app/services/auth.service.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Carga la sesión del usuario desde el almacenamiento local</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="esAdministrador"></a>
+                    <span class="name">
+                        <span ><b>esAdministrador</b></span>
+                        <a href="#esAdministrador"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>esAdministrador()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="117"
+                                    class="link-to-prism">src/app/services/auth.service.ts:117</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Verifica si el usuario actual es administrador</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>true si el usuario es administrador, false en caso contrario</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="generarTokenRecuperacion"></a>
+                    <span class="name">
+                        <span ><b>generarTokenRecuperacion</b></span>
+                        <a href="#generarTokenRecuperacion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>generarTokenRecuperacion(email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="146"
+                                    class="link-to-prism">src/app/services/auth.service.ts:146</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Genera un token de recuperación para un email dado</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>email</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Email del usuario</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>string | null</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>El token generado o null si el email no existe</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getUsuarioActual"></a>
+                    <span class="name">
+                        <span ><b>getUsuarioActual</b></span>
+                        <a href="#getUsuarioActual"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getUsuarioActual()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="57"
+                                    class="link-to-prism">src/app/services/auth.service.ts:57</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtiene el usuario actual</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>El usuario actual o null si no hay sesión</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getUsuarioActualObservable"></a>
+                    <span class="name">
+                        <span ><b>getUsuarioActualObservable</b></span>
+                        <a href="#getUsuarioActualObservable"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getUsuarioActualObservable()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="69"
+                                    class="link-to-prism">src/app/services/auth.service.ts:69</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtiene un Observable del usuario actual</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Usuario.html" target="_self" >Observable&lt;Usuario | null&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Observable del usuario actual</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getUsuarios"></a>
+                    <span class="name">
+                        <span ><b>getUsuarios</b></span>
+                        <a href="#getUsuarios"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getUsuarios()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="251"
+                                    class="link-to-prism">src/app/services/auth.service.ts:251</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtiene la lista de todos los usuarios</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>any[]</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Array de usuarios</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="login"></a>
+                    <span class="name">
+                        <span ><b>login</b></span>
+                        <a href="#login"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>login(email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, password: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="79"
+                                    class="link-to-prism">src/app/services/auth.service.ts:79</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Realiza el inicio de sesión de un usuario</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>email</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Email del usuario</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>password</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Contraseña del usuario</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>true si el login es exitoso, false en caso contrario</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logout"></a>
+                    <span class="name">
+                        <span ><b>logout</b></span>
+                        <a href="#logout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>logout()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">src/app/services/auth.service.ts:106</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Cierra la sesión del usuario actual</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="recuperarPassword"></a>
+                    <span class="name">
+                        <span ><b>recuperarPassword</b></span>
+                        <a href="#recuperarPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>recuperarPassword(email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, newPassword: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="167"
+                                    class="link-to-prism">src/app/services/auth.service.ts:167</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Recupera la contraseña de un usuario</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>email</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Email del usuario</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>token</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Token de recuperación</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>newPassword</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Nueva contraseña</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>true si la recuperación es exitosa, false en caso contrario</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registrarUsuario"></a>
+                    <span class="name">
+                        <span ><b>registrarUsuario</b></span>
+                        <a href="#registrarUsuario"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>registrarUsuario(nuevoUsuario: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="127"
+                                    class="link-to-prism">src/app/services/auth.service.ts:127</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Registra un nuevo usuario</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>nuevoUsuario</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Datos del nuevo usuario</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>true si el registro es exitoso, false si el usuario ya existe</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isBrowser"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>isBrowser</b></span>
+                        <a href="#isBrowser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/services/auth.service.ts:32</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Indica si el código se está ejecutando en un navegador</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="usuarioActual"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>usuarioActual</b></span>
+                        <a href="#usuarioActual"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;Usuario | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/services/auth.service.ts:30</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>BehaviorSubject para manejar el usuario actual</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, Inject, PLATFORM_ID } from &#x27;@angular/core&#x27;;
+import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
+import { isPlatformBrowser } from &#x27;@angular/common&#x27;;
+
+/**
+ * Interfaz que define la estructura de un usuario
+ */
+interface Usuario {
+  /** Email del usuario */
+  email: string;
+  /** Nombre del usuario */
+  nombre: string;
+  /** Celular del usuario */
+  celular: string;
+  /** Fecha de nacimiento del usuario */
+  fechaNacimiento: string;
+  /** Rol del usuario */
+  rol: string;
+}
+
+/**
+ * @description
+ * Servicio para manejar la autenticación y gestión de usuarios
+ */
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class AuthService {
+  /** BehaviorSubject para manejar el usuario actual */
+  private usuarioActual &#x3D; new BehaviorSubject&lt;Usuario | null&gt;(null);
+  /** Indica si el código se está ejecutando en un navegador */
+  private isBrowser: boolean;
+
+  /**
+   * Constructor del servicio
+   * @param platformId ID de la plataforma para determinar si es un navegador
+   */
+  constructor(@Inject(PLATFORM_ID) platformId: Object) {
+    this.isBrowser &#x3D; isPlatformBrowser(platformId);
+    this.cargarSesion();
+  }
+
+  /**
+   * Carga la sesión del usuario desde el almacenamiento local
+   */
+  cargarSesion() {
+    if (this.isBrowser) {
+      const sesionUsuario &#x3D; JSON.parse(localStorage.getItem(&#x27;sesionUsuario&#x27;) || &#x27;null&#x27;);
+      this.usuarioActual.next(sesionUsuario);
+    }
+  }
+
+  /**
+   * Obtiene el usuario actual
+   * @returns El usuario actual o null si no hay sesión
+   */
+  getUsuarioActual(): any {
+    if (this.isBrowser) {
+      const sesionUsuarioJSON &#x3D; localStorage.getItem(&#x27;sesionUsuario&#x27;);
+      return sesionUsuarioJSON ? JSON.parse(sesionUsuarioJSON) : null;
+    }
+    return null;
+  }
+
+  /**
+   * Obtiene un Observable del usuario actual
+   * @returns Observable del usuario actual
+   */
+  getUsuarioActualObservable(): Observable&lt;Usuario | null&gt; {
+    return this.usuarioActual.asObservable();
+  }
+
+  /**
+   * Realiza el inicio de sesión de un usuario
+   * @param email Email del usuario
+   * @param password Contraseña del usuario
+   * @returns true si el login es exitoso, false en caso contrario
+   */
+  login(email: string, password: string): boolean {
+    if (this.isBrowser) {
+      const usuarios &#x3D; JSON.parse(localStorage.getItem(&#x27;usuarios&#x27;) || &#x27;[]&#x27;);
+      const usuarioEncontrado &#x3D; usuarios.find(
+        (usuario: any) &#x3D;&gt; usuario.email &#x3D;&#x3D;&#x3D; email &amp;&amp; usuario.password &#x3D;&#x3D;&#x3D; password
+      );
+
+      if (usuarioEncontrado) {
+        const usuarioSinContraseña: Usuario &#x3D; {
+          email: usuarioEncontrado.email,
+          nombre: usuarioEncontrado.nombre,
+          celular: usuarioEncontrado.celular,
+          fechaNacimiento: usuarioEncontrado.fechaNacimiento,
+          rol: usuarioEncontrado.rol,
+        };
+
+        localStorage.setItem(&#x27;sesionUsuario&#x27;, JSON.stringify(usuarioSinContraseña));
+        this.usuarioActual.next(usuarioSinContraseña);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Cierra la sesión del usuario actual
+   */
+  logout() {
+    if (this.isBrowser) {
+      localStorage.removeItem(&#x27;sesionUsuario&#x27;);
+    }
+    this.usuarioActual.next(null);
+  }
+
+  /**
+   * Verifica si el usuario actual es administrador
+   * @returns true si el usuario es administrador, false en caso contrario
+   */
+  esAdministrador(): boolean {
+    return this.usuarioActual.value?.rol &#x3D;&#x3D;&#x3D; &#x27;administrador&#x27;;
+  }
+
+
+  /**
+   * Registra un nuevo usuario
+   * @param nuevoUsuario Datos del nuevo usuario
+   * @returns true si el registro es exitoso, false si el usuario ya existe
+   */
+  registrarUsuario(nuevoUsuario: any): boolean {
+    if (this.isBrowser) {
+      let usuarios &#x3D; JSON.parse(localStorage.getItem(&#x27;usuarios&#x27;) || &#x27;[]&#x27;);
+      const usuarioExistente &#x3D; usuarios.find((u: any) &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; nuevoUsuario.email);
+      if (usuarioExistente) {
+        return false;
+      }
+      usuarios.push(nuevoUsuario);
+      localStorage.setItem(&#x27;usuarios&#x27;, JSON.stringify(usuarios));
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Genera un token de recuperación para un email dado
+   * @param email Email del usuario
+   * @returns El token generado o null si el email no existe
+   */
+  generarTokenRecuperacion(email: string): string | null {
+    if (this.isBrowser) {
+      const usuarios &#x3D; JSON.parse(localStorage.getItem(&#x27;usuarios&#x27;) || &#x27;[]&#x27;);
+      const usuario &#x3D; usuarios.find((u: any) &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; email);
+      if (usuario) {
+        const token &#x3D; Math.floor(Math.random() * 900000) + 100000;
+        usuario.token &#x3D; token.toString();
+        localStorage.setItem(&#x27;usuarios&#x27;, JSON.stringify(usuarios));
+        return token.toString();
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Recupera la contraseña de un usuario
+   * @param email Email del usuario
+   * @param token Token de recuperación
+   * @param newPassword Nueva contraseña
+   * @returns true si la recuperación es exitosa, false en caso contrario
+   */
+  recuperarPassword(email: string, token: string, newPassword: string): boolean {
+    if (this.isBrowser) {
+      const usuarios &#x3D; JSON.parse(localStorage.getItem(&#x27;usuarios&#x27;) || &#x27;[]&#x27;);
+      const usuario &#x3D; usuarios.find((u: any) &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; email &amp;&amp; u.token &#x3D;&#x3D;&#x3D; token);
+      if (usuario) {
+        usuario.password &#x3D; newPassword;
+        usuario.token &#x3D; &#x27;&#x27;;
+        localStorage.setItem(&#x27;usuarios&#x27;, JSON.stringify(usuarios));
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Actualiza el perfil del usuario actual
+   * @param datosActualizados Nuevos datos del perfil
+   * @returns true si la actualización es exitosa, false en caso contrario
+   */
+  actualizarPerfil(datosActualizados: any): boolean {
+    if (this.isBrowser) {
+      const usuariosJSON &#x3D; localStorage.getItem(&#x27;usuarios&#x27;);
+      if (usuariosJSON) {
+        let usuarios &#x3D; JSON.parse(usuariosJSON);
+        const sesionUsuario &#x3D; this.getUsuarioActual();
+
+        if (sesionUsuario) {
+          // Actualizar el usuario en el array de usuarios
+          usuarios &#x3D; usuarios.map((usuario: any) &#x3D;&gt; {
+            if (usuario.email &#x3D;&#x3D;&#x3D; sesionUsuario.email) {
+              return { ...usuario, ...datosActualizados };
+            }
+            return usuario;
+          });
+
+          // Actualizar el localStorage
+          localStorage.setItem(&#x27;usuarios&#x27;, JSON.stringify(usuarios));
+
+          // Actualizar la sesión del usuario
+          const usuarioActualizado &#x3D; { ...sesionUsuario, ...datosActualizados };
+          localStorage.setItem(&#x27;sesionUsuario&#x27;, JSON.stringify(usuarioActualizado));
+
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Actualiza la contraseña del usuario actual
+   * @param newPassword Nueva contraseña
+   * @returns true si la actualización es exitosa, false en caso contrario
+   */
+  actualizarContraseña(newPassword: string): boolean {
+    if (this.isBrowser) {
+      const usuariosJSON &#x3D; localStorage.getItem(&#x27;usuarios&#x27;);
+      if (usuariosJSON) {
+        let usuarios &#x3D; JSON.parse(usuariosJSON);
+        const sesionUsuario &#x3D; this.getUsuarioActual();
+
+        if (sesionUsuario) {
+          // Actualizar la contraseña del usuario en el array de usuarios
+          usuarios &#x3D; usuarios.map((usuario: any) &#x3D;&gt; {
+            if (usuario.email &#x3D;&#x3D;&#x3D; sesionUsuario.email) {
+              return { ...usuario, password: newPassword };
+            }
+            return usuario;
+          });
+
+          // Actualizar el localStorage
+          localStorage.setItem(&#x27;usuarios&#x27;, JSON.stringify(usuarios));
+
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Obtiene la lista de todos los usuarios
+   * @returns Array de usuarios
+   */
+  getUsuarios(): any[] {
+    if (this.isBrowser) {
+      const usuariosJSON &#x3D; localStorage.getItem(&#x27;usuarios&#x27;);
+      return usuariosJSON ? JSON.parse(usuariosJSON) : [];
+    }
+    return [];
+  }
+
+  /**
+   * Actualiza los datos de un usuario
+   * @param usuario Datos actualizados del usuario
+   * @returns true si la actualización es exitosa, false en caso contrario
+   */
+  actualizarUsuario(usuario: any): boolean {
+    if (this.isBrowser) {
+      let usuarios &#x3D; this.getUsuarios();
+      const index &#x3D; usuarios.findIndex(u &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; usuario.email);
+      if (index !&#x3D;&#x3D; -1) {
+        usuarios[index] &#x3D; usuario;
+        localStorage.setItem(&#x27;usuarios&#x27;, JSON.stringify(usuarios));
+        return true;
+      }
+    }
+    return false;
+  }
+
+}</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'AuthService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -4,6 +4,10 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractContro
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
+/**
+ * @description
+ * Componente para manejar el registro de nuevos usuarios
+ */
 @Component({
   selector: 'app-registrarme',
   standalone: true,
@@ -12,14 +16,24 @@ import { Router } from '@angular/router';
   styleUrls: ['./registrarme.component.scss']
 })
 export class RegistrarmeComponent implements OnInit {
+  /** Formulario de registro de usuario */
   registroForm!: FormGroup;
 
+  /**
+   * Constructor del componente
+   * @param fb FormBuilder para crear el formulario reactivo
+   * @param authService Servicio de autenticación
+   * @param router Router para la navegación
+   */
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router
   ) { }
 
+  /**
+   * Inicializa el componente y configura el formulario de registro
+   */
   ngOnInit() {
     this.registroForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -31,6 +45,11 @@ export class RegistrarmeComponent implements OnInit {
     }, { validators: this.passwordMatchValidator });
   }
 
+  /**
+   * Validador personalizado para verificar que las contraseñas coincidan
+   * @param control AbstractControl que contiene los campos de contraseña
+   * @returns Objeto con error si las contraseñas no coinciden, null si son iguales
+   */
   passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
     const password = control.get('password');
     const repetirPassword = control.get('repetirPassword');
@@ -44,6 +63,11 @@ export class RegistrarmeComponent implements OnInit {
     }
   }
 
+  /**
+   * Validador personalizado para verificar la edad mínima
+   * @param control Control del formulario a validar
+   * @returns Objeto con error si la edad es menor a 14, null si es válida
+   */
   edadMinimaValidator(control: any) {
     const hoy = new Date();
     const fechaNac = new Date(control.value);
@@ -55,6 +79,9 @@ export class RegistrarmeComponent implements OnInit {
     return edad >= 14 ? null : { 'edadMinima': true };
   }
 
+  /**
+   * Maneja el envío del formulario de registro
+   */
   onSubmit() {
     if (this.registroForm.valid) {
       const nuevoUsuario = {

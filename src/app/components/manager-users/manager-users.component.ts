@@ -3,6 +3,10 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 
+/**
+ * @description
+ * Componente para gestionar usuarios.
+ */
 @Component({
   selector: 'app-manager-users',
   standalone: true,
@@ -11,20 +15,34 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./manager-users.component.scss']
 })
 export class ManagerUsersComponent implements OnInit {
+  /** Lista de usuarios */
   usuarios: any[] = [];
+  /** Formulario para editar usuarios */
   editForm!: FormGroup;
+  /** Usuario actualmente en edición */
   editingUser: any = null;
 
+  /**
+   * Constructor del componente
+   * @param fb FormBuilder para crear el formulario reactivo
+   * @param authService Servicio de autenticación
+   */
   constructor(
     private fb: FormBuilder,
     private authService: AuthService
   ) { }
 
+  /**
+   * Inicializa el componente, carga los usuarios y configura el formulario
+   */
   ngOnInit() {
     this.loadUsers();
     this.initForm();
   }
 
+  /**
+   * Inicializa el formulario de edición
+   */
   initForm() {
     this.editForm = this.fb.group({
       email: [{ value: '', disabled: true }, [Validators.required, Validators.email]],
@@ -35,15 +53,25 @@ export class ManagerUsersComponent implements OnInit {
     });
   }
 
+  /**
+   * Carga la lista de usuarios
+   */
   loadUsers() {
     this.usuarios = this.authService.getUsuarios();
   }
 
+  /**
+   * Prepara el formulario para editar un usuario
+   * @param usuario Usuario a editar
+   */
   editUser(usuario: any) {
     this.editingUser = usuario;
     this.editForm.patchValue(usuario);
   }
 
+  /**
+   * Maneja el envío del formulario de edición
+   */
   onSubmit() {
     if (this.editForm.valid) {
       const updatedUser = {
@@ -66,10 +94,18 @@ export class ManagerUsersComponent implements OnInit {
     }
   }
 
+  /**
+   * Cierra el modal de edición
+   */
   closeModal() {
     this.editingUser = null;
   }
 
+  /**
+   * Validador personalizado para verificar la edad mínima
+   * @param control Control del formulario a validar
+   * @returns Objeto con error si la edad es menor a 14, null si es válida
+   */
   edadMinimaValidator(control: any) {
     const hoy = new Date();
     const fechaNac = new Date(control.value);

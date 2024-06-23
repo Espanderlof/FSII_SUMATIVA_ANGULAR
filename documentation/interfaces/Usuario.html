@@ -1,0 +1,749 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>albavets documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">albavets documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  Usuario</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/services/auth.service.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Interfaz que define la estructura de un usuario</p>
+
+            </p>
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#celular" 
+>
+                                            celular
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#email" 
+>
+                                            email
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#fechaNacimiento" 
+>
+                                            fechaNacimiento
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#nombre" 
+>
+                                            nombre
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#rol" 
+>
+                                            rol
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="celular"></a>
+                                        <span class="name "><b>celular</b>
+                                            <a href="#celular">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>celular:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Celular del usuario</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="email"></a>
+                                        <span class="name "><b>email</b>
+                                            <a href="#email">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>email:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Email del usuario</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="fechaNacimiento"></a>
+                                        <span class="name "><b>fechaNacimiento</b>
+                                            <a href="#fechaNacimiento">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>fechaNacimiento:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Fecha de nacimiento del usuario</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="nombre"></a>
+                                        <span class="name "><b>nombre</b>
+                                            <a href="#nombre">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>nombre:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Nombre del usuario</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="rol"></a>
+                                        <span class="name "><b>rol</b>
+                                            <a href="#rol">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>rol:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Rol del usuario</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, Inject, PLATFORM_ID } from &#x27;@angular/core&#x27;;
+import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
+import { isPlatformBrowser } from &#x27;@angular/common&#x27;;
+
+/**
+ * Interfaz que define la estructura de un usuario
+ */
+interface Usuario {
+  /** Email del usuario */
+  email: string;
+  /** Nombre del usuario */
+  nombre: string;
+  /** Celular del usuario */
+  celular: string;
+  /** Fecha de nacimiento del usuario */
+  fechaNacimiento: string;
+  /** Rol del usuario */
+  rol: string;
+}
+
+/**
+ * @description
+ * Servicio para manejar la autenticación y gestión de usuarios
+ */
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class AuthService {
+  /** BehaviorSubject para manejar el usuario actual */
+  private usuarioActual &#x3D; new BehaviorSubject&lt;Usuario | null&gt;(null);
+  /** Indica si el código se está ejecutando en un navegador */
+  private isBrowser: boolean;
+
+  /**
+   * Constructor del servicio
+   * @param platformId ID de la plataforma para determinar si es un navegador
+   */
+  constructor(@Inject(PLATFORM_ID) platformId: Object) {
+    this.isBrowser &#x3D; isPlatformBrowser(platformId);
+    this.cargarSesion();
+  }
+
+  /**
+   * Carga la sesión del usuario desde el almacenamiento local
+   */
+  cargarSesion() {
+    if (this.isBrowser) {
+      const sesionUsuario &#x3D; JSON.parse(localStorage.getItem(&#x27;sesionUsuario&#x27;) || &#x27;null&#x27;);
+      this.usuarioActual.next(sesionUsuario);
+    }
+  }
+
+  /**
+   * Obtiene el usuario actual
+   * @returns El usuario actual o null si no hay sesión
+   */
+  getUsuarioActual(): any {
+    if (this.isBrowser) {
+      const sesionUsuarioJSON &#x3D; localStorage.getItem(&#x27;sesionUsuario&#x27;);
+      return sesionUsuarioJSON ? JSON.parse(sesionUsuarioJSON) : null;
+    }
+    return null;
+  }
+
+  /**
+   * Obtiene un Observable del usuario actual
+   * @returns Observable del usuario actual
+   */
+  getUsuarioActualObservable(): Observable&lt;Usuario | null&gt; {
+    return this.usuarioActual.asObservable();
+  }
+
+  /**
+   * Realiza el inicio de sesión de un usuario
+   * @param email Email del usuario
+   * @param password Contraseña del usuario
+   * @returns true si el login es exitoso, false en caso contrario
+   */
+  login(email: string, password: string): boolean {
+    if (this.isBrowser) {
+      const usuarios &#x3D; JSON.parse(localStorage.getItem(&#x27;usuarios&#x27;) || &#x27;[]&#x27;);
+      const usuarioEncontrado &#x3D; usuarios.find(
+        (usuario: any) &#x3D;&gt; usuario.email &#x3D;&#x3D;&#x3D; email &amp;&amp; usuario.password &#x3D;&#x3D;&#x3D; password
+      );
+
+      if (usuarioEncontrado) {
+        const usuarioSinContraseña: Usuario &#x3D; {
+          email: usuarioEncontrado.email,
+          nombre: usuarioEncontrado.nombre,
+          celular: usuarioEncontrado.celular,
+          fechaNacimiento: usuarioEncontrado.fechaNacimiento,
+          rol: usuarioEncontrado.rol,
+        };
+
+        localStorage.setItem(&#x27;sesionUsuario&#x27;, JSON.stringify(usuarioSinContraseña));
+        this.usuarioActual.next(usuarioSinContraseña);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Cierra la sesión del usuario actual
+   */
+  logout() {
+    if (this.isBrowser) {
+      localStorage.removeItem(&#x27;sesionUsuario&#x27;);
+    }
+    this.usuarioActual.next(null);
+  }
+
+  /**
+   * Verifica si el usuario actual es administrador
+   * @returns true si el usuario es administrador, false en caso contrario
+   */
+  esAdministrador(): boolean {
+    return this.usuarioActual.value?.rol &#x3D;&#x3D;&#x3D; &#x27;administrador&#x27;;
+  }
+
+
+  /**
+   * Registra un nuevo usuario
+   * @param nuevoUsuario Datos del nuevo usuario
+   * @returns true si el registro es exitoso, false si el usuario ya existe
+   */
+  registrarUsuario(nuevoUsuario: any): boolean {
+    if (this.isBrowser) {
+      let usuarios &#x3D; JSON.parse(localStorage.getItem(&#x27;usuarios&#x27;) || &#x27;[]&#x27;);
+      const usuarioExistente &#x3D; usuarios.find((u: any) &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; nuevoUsuario.email);
+      if (usuarioExistente) {
+        return false;
+      }
+      usuarios.push(nuevoUsuario);
+      localStorage.setItem(&#x27;usuarios&#x27;, JSON.stringify(usuarios));
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Genera un token de recuperación para un email dado
+   * @param email Email del usuario
+   * @returns El token generado o null si el email no existe
+   */
+  generarTokenRecuperacion(email: string): string | null {
+    if (this.isBrowser) {
+      const usuarios &#x3D; JSON.parse(localStorage.getItem(&#x27;usuarios&#x27;) || &#x27;[]&#x27;);
+      const usuario &#x3D; usuarios.find((u: any) &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; email);
+      if (usuario) {
+        const token &#x3D; Math.floor(Math.random() * 900000) + 100000;
+        usuario.token &#x3D; token.toString();
+        localStorage.setItem(&#x27;usuarios&#x27;, JSON.stringify(usuarios));
+        return token.toString();
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Recupera la contraseña de un usuario
+   * @param email Email del usuario
+   * @param token Token de recuperación
+   * @param newPassword Nueva contraseña
+   * @returns true si la recuperación es exitosa, false en caso contrario
+   */
+  recuperarPassword(email: string, token: string, newPassword: string): boolean {
+    if (this.isBrowser) {
+      const usuarios &#x3D; JSON.parse(localStorage.getItem(&#x27;usuarios&#x27;) || &#x27;[]&#x27;);
+      const usuario &#x3D; usuarios.find((u: any) &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; email &amp;&amp; u.token &#x3D;&#x3D;&#x3D; token);
+      if (usuario) {
+        usuario.password &#x3D; newPassword;
+        usuario.token &#x3D; &#x27;&#x27;;
+        localStorage.setItem(&#x27;usuarios&#x27;, JSON.stringify(usuarios));
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Actualiza el perfil del usuario actual
+   * @param datosActualizados Nuevos datos del perfil
+   * @returns true si la actualización es exitosa, false en caso contrario
+   */
+  actualizarPerfil(datosActualizados: any): boolean {
+    if (this.isBrowser) {
+      const usuariosJSON &#x3D; localStorage.getItem(&#x27;usuarios&#x27;);
+      if (usuariosJSON) {
+        let usuarios &#x3D; JSON.parse(usuariosJSON);
+        const sesionUsuario &#x3D; this.getUsuarioActual();
+
+        if (sesionUsuario) {
+          // Actualizar el usuario en el array de usuarios
+          usuarios &#x3D; usuarios.map((usuario: any) &#x3D;&gt; {
+            if (usuario.email &#x3D;&#x3D;&#x3D; sesionUsuario.email) {
+              return { ...usuario, ...datosActualizados };
+            }
+            return usuario;
+          });
+
+          // Actualizar el localStorage
+          localStorage.setItem(&#x27;usuarios&#x27;, JSON.stringify(usuarios));
+
+          // Actualizar la sesión del usuario
+          const usuarioActualizado &#x3D; { ...sesionUsuario, ...datosActualizados };
+          localStorage.setItem(&#x27;sesionUsuario&#x27;, JSON.stringify(usuarioActualizado));
+
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Actualiza la contraseña del usuario actual
+   * @param newPassword Nueva contraseña
+   * @returns true si la actualización es exitosa, false en caso contrario
+   */
+  actualizarContraseña(newPassword: string): boolean {
+    if (this.isBrowser) {
+      const usuariosJSON &#x3D; localStorage.getItem(&#x27;usuarios&#x27;);
+      if (usuariosJSON) {
+        let usuarios &#x3D; JSON.parse(usuariosJSON);
+        const sesionUsuario &#x3D; this.getUsuarioActual();
+
+        if (sesionUsuario) {
+          // Actualizar la contraseña del usuario en el array de usuarios
+          usuarios &#x3D; usuarios.map((usuario: any) &#x3D;&gt; {
+            if (usuario.email &#x3D;&#x3D;&#x3D; sesionUsuario.email) {
+              return { ...usuario, password: newPassword };
+            }
+            return usuario;
+          });
+
+          // Actualizar el localStorage
+          localStorage.setItem(&#x27;usuarios&#x27;, JSON.stringify(usuarios));
+
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Obtiene la lista de todos los usuarios
+   * @returns Array de usuarios
+   */
+  getUsuarios(): any[] {
+    if (this.isBrowser) {
+      const usuariosJSON &#x3D; localStorage.getItem(&#x27;usuarios&#x27;);
+      return usuariosJSON ? JSON.parse(usuariosJSON) : [];
+    }
+    return [];
+  }
+
+  /**
+   * Actualiza los datos de un usuario
+   * @param usuario Datos actualizados del usuario
+   * @returns true si la actualización es exitosa, false en caso contrario
+   */
+  actualizarUsuario(usuario: any): boolean {
+    if (this.isBrowser) {
+      let usuarios &#x3D; this.getUsuarios();
+      const index &#x3D; usuarios.findIndex(u &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; usuario.email);
+      if (index !&#x3D;&#x3D; -1) {
+        usuarios[index] &#x3D; usuario;
+        localStorage.setItem(&#x27;usuarios&#x27;, JSON.stringify(usuarios));
+        return true;
+      }
+    }
+    return false;
+  }
+
+}</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'Usuario.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

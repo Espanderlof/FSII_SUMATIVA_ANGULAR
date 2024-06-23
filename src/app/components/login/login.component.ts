@@ -4,6 +4,10 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
+/**
+ * @description
+ * Componente para manejar el inicio de sesión de usuarios.
+ */
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -12,14 +16,24 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  /** Formulario de inicio de sesión */
   loginForm!: FormGroup;
 
+  /**
+   * Constructor del componente
+   * @param fb FormBuilder para crear el formulario reactivo
+   * @param authService Servicio de autenticación
+   * @param router Router para la navegación
+   */
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router
   ) { }
 
+  /**
+   * Inicializa el componente y configura el formulario de inicio de sesión
+   */
   ngOnInit() {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -27,6 +41,9 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  /**
+   * Maneja el envío del formulario de inicio de sesión
+   */
   onSubmit() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
