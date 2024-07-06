@@ -1,27 +1,22 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin, map } from 'rxjs';
+import { JsonService } from './json.service'; // Asegúrese de que la ruta de importación sea correcta
 
-/**
- * @description
- * Servicio para manejar las operaciones relacionadas con los productos
- */
 @Injectable({
   providedIn: 'root'
 })
 export class ProductosService {
+  constructor(private jsonService: JsonService) { }
 
-  /**
-   * Constructor del servicio
-   * @param http Cliente HTTP para realizar peticiones
-   */
-  constructor(private http: HttpClient) { }
-
-  /**
-   * Obtiene los datos de productos desde un archivo JSON
-   * @returns Observable con los datos de productos, categorías y usuarios
-   */
   getData(): Observable<any> {
-    return this.http.get('/assets/db/albavetsDB.json');
+    return forkJoin({
+      categorias: this.jsonService.getJsonCategoriasData(),
+      productos: this.jsonService.getJsonProductosData()
+    }).pipe(
+      map(result => ({
+        categorias: result.categorias,
+        productos: result.productos
+      }))
+    );
   }
 }

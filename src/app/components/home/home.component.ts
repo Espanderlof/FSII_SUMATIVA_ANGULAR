@@ -51,10 +51,19 @@ export class HomeComponent {
    * Carga los datos de productos y categorías desde el servicio
    */
   loadData() {
-    this.productosService.getData().subscribe(data => {
-      this.categorias = [...data.categorias];
-      this.productos = data.productos;
-      this.filterProducts(0);
+    this.productosService.getData().subscribe({
+      next: (data) => {
+        if (data && Array.isArray(data.categorias) && Array.isArray(data.productos)) {
+          this.categorias = [...data.categorias];
+          this.productos = data.productos;
+          this.filterProducts(0);
+        } else {
+          console.error('Data structure is not as expected:', data);
+        }
+      },
+      error: (error) => {
+        console.error('Error loading data:', error);
+      }
     });
   }
 
