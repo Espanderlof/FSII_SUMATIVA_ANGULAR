@@ -148,7 +148,19 @@ export class AuthService {
           return of(false);
         }
         console.log('Añadiendo nuevo usuario a la lista');
-        usuarios.push(nuevoUsuario);
+        
+        // Creamos un nuevo objeto de usuario sin el campo repetirPassword
+        const usuarioParaGuardar = {
+          email: nuevoUsuario.email,
+          nombre: nuevoUsuario.nombre,
+          celular: nuevoUsuario.celular,
+          fechaNacimiento: nuevoUsuario.fechaNacimiento,
+          password: nuevoUsuario.password,
+          rol: nuevoUsuario.rol,
+          token: nuevoUsuario.token
+        };
+  
+        usuarios.push(usuarioParaGuardar);
         return this.jsonService.MetodoUsuarios(usuarios).pipe(
           map(() => {
             console.log('Usuario registrado exitosamente');
@@ -174,18 +186,31 @@ export class AuthService {
    */
   generarTokenRecuperacion(email: string): Observable<string | null> {
     return this.jsonService.getJsonUsuariosData().pipe(
-      map(usuarios => {
+      switchMap(usuarios => {
         const usuario = usuarios.find((u: any) => u.email === email);
         if (usuario) {
           const token = Math.floor(Math.random() * 900000) + 100000;
           usuario.token = token.toString();
-          this.jsonService.MetodoUsuarios(usuarios);
-          return token.toString();
+          console.log('Usuario actualizado:', usuario);
+          
+          // Actualizamos la lista de usuarios
+          const usuariosActualizados = usuarios.map((u: any) => 
+            u.email === email ? usuario : u
+          );
+
+          // Sobrescribimos todo el archivo JSON
+          return this.jsonService.MetodoUsuarios(usuariosActualizados).pipe(
+            map(() => token.toString()),
+            catchError(error => {
+              console.error('Error al guardar el token en Firebase:', error);
+              return of(null);
+            })
+          );
         }
-        return null;
+        return of(null);
       }),
       catchError(error => {
-        console.error('Error generating recovery token:', error);
+        console.error('Error al generar el token de recuperación:', error);
         return of(null);
       })
     );
@@ -200,18 +225,38 @@ export class AuthService {
    */
   recuperarPassword(email: string, token: string, newPassword: string): Observable<boolean> {
     return this.jsonService.getJsonUsuariosData().pipe(
-      map(usuarios => {
+      switchMap(usuarios => {
         const usuario = usuarios.find((u: any) => u.email === email && u.token === token);
         if (usuario) {
-          usuario.password = newPassword;
-          usuario.token = '';
-          this.jsonService.MetodoUsuarios(usuarios);
-          return true;
+          // Actualizamos solo los campos necesarios
+          const usuarioActualizado = {
+            ...usuario,
+            password: newPassword,
+            token: ''
+          };
+          // Eliminamos el campo repetirPassword si existe
+          delete usuarioActualizado.repetirPassword;
+
+          console.log('Usuario actualizado:', usuarioActualizado);
+          
+          // Actualizamos la lista de usuarios
+          const usuariosActualizados = usuarios.map((u: any) => 
+            u.email === email ? usuarioActualizado : u
+          );
+
+          // Sobrescribimos todo el archivo JSON
+          return this.jsonService.MetodoUsuarios(usuariosActualizados).pipe(
+            map(() => true),
+            catchError(error => {
+              console.error('Error al guardar la nueva contraseña en Firebase:', error);
+              return of(false);
+            })
+          );
         }
-        return false;
+        return of(false);
       }),
       catchError(error => {
-        console.error('Error recovering password:', error);
+        console.error('Error al recuperar la contraseña:', error);
         return of(false);
       })
     );

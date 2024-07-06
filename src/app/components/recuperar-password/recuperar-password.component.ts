@@ -71,12 +71,19 @@ export class RecuperarPasswordComponent implements OnInit {
   generarToken() {
     if (this.emailForm.valid) {
       const email = this.emailForm.get('email')?.value;
-      const token = this.authService.generarTokenRecuperacion(email);
-      if (token) {
-        alert(`Tu token de recuperación es: ${token}`);
-      } else {
-        alert("El correo electrónico ingresado no está registrado.");
-      }
+      this.authService.generarTokenRecuperacion(email).subscribe(
+        (token) => {
+          if (token) {
+            alert(`Tu token de recuperación es: ${token}`);
+          } else {
+            alert("El correo electrónico ingresado no está registrado.");
+          }
+        },
+        (error) => {
+          console.error('Error al generar el token:', error);
+          alert("Ocurrió un error al generar el token. Por favor, inténtalo de nuevo.");
+        }
+      );
     } else {
       this.emailForm.markAllAsTouched();
     }
@@ -91,12 +98,20 @@ export class RecuperarPasswordComponent implements OnInit {
       const token = this.passwordForm.get('token')?.value;
       const newPassword = this.passwordForm.get('newPassword')?.value;
 
-      if (this.authService.recuperarPassword(email, token, newPassword)) {
-        alert("La contraseña ha sido actualizada correctamente.");
-        this.router.navigate(['/login']);
-      } else {
-        alert("El correo electrónico o el token ingresados no son válidos. Por favor, verifica nuevamente.");
-      }
+      this.authService.recuperarPassword(email, token, newPassword).subscribe(
+        (success) => {
+          if (success) {
+            alert("La contraseña ha sido actualizada correctamente.");
+            this.router.navigate(['/login']);
+          } else {
+            alert("El correo electrónico o el token ingresados no son válidos. Por favor, verifica nuevamente.");
+          }
+        },
+        (error) => {
+          console.error('Error al recuperar la contraseña:', error);
+          alert("Ocurrió un error al actualizar la contraseña. Por favor, inténtalo de nuevo.");
+        }
+      );
     } else {
       Object.values(this.passwordForm.controls).forEach(control => {
         if (control.invalid) {

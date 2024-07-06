@@ -60,9 +60,11 @@ export class JsonService {
       })
   }
 
+  //TRAER TODOS LOS USUARIOS
   getJsonUsuariosData(): Observable<any> {
     return this.http.get(this.jsonUsuariosUrl);
   }
+  //SOBRESCRIBIR EL ARCHIVO JSON DE USUARIOS
   MetodoUsuarios(listaUsuarios: any): Observable<any> {
     return this.http.post(this.jsonUsuariosUrl, listaUsuarios, this.httpOptionsUsuarios);
   }
