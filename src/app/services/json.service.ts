@@ -51,7 +51,7 @@ export class JsonService {
   }
   MetodoProductos(listaProductos:any) {
     console.log(listaProductos);
-    this.http.post(this.jsonCategoriasUrl, listaProductos, this.httpOptionsProductos).subscribe(
+    this.http.post(this.jsonProductosUrl, listaProductos, this.httpOptionsProductos).subscribe(
       response => {
         console.log('Archivo JSON sobrescrito con exito', response);
       },
@@ -63,14 +63,7 @@ export class JsonService {
   getJsonUsuariosData(): Observable<any> {
     return this.http.get(this.jsonUsuariosUrl);
   }
-  MetodoUsuarios(listaUsuarios:any) {
-    console.log(listaUsuarios);
-    this.http.post(this.jsonCategoriasUrl, listaUsuarios, this.httpOptionsUsuarios).subscribe(
-      response => {
-        console.log('Archivo JSON sobrescrito con exito', response);
-      },
-      error => {
-        console.error('Error al sobrescribir el archivo JSON', error);
-      })
+  MetodoUsuarios(listaUsuarios: any): Observable<any> {
+    return this.http.post(this.jsonUsuariosUrl, listaUsuarios, this.httpOptionsUsuarios);
   }
 }

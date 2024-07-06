@@ -57,7 +57,14 @@ export class ManagerUsersComponent implements OnInit {
    * Carga la lista de usuarios
    */
   loadUsers() {
-    this.usuarios = this.authService.getUsuarios();
+    this.authService.getUsuarios().subscribe(
+      (users) => {
+        this.usuarios = users;
+      },
+      (error) => {
+        console.error('Error loading users:', error);
+      }
+    );
   }
 
   /**
@@ -78,13 +85,21 @@ export class ManagerUsersComponent implements OnInit {
         ...this.editingUser,
         ...this.editForm.value
       };
-      if (this.authService.actualizarUsuario(updatedUser)) {
-        alert('Usuario actualizado correctamente');
-        this.loadUsers();
-        this.closeModal();
-      } else {
-        alert('Error al actualizar el usuario');
-      }
+      this.authService.actualizarUsuario(updatedUser).subscribe(
+        (success) => {
+          if (success) {
+            alert('Usuario actualizado correctamente');
+            this.loadUsers();
+            this.closeModal();
+          } else {
+            alert('Error al actualizar el usuario');
+          }
+        },
+        (error) => {
+          console.error('Error updating user:', error);
+          alert('Error al actualizar el usuario');
+        }
+      );
     } else {
       Object.values(this.editForm.controls).forEach(control => {
         if (control.invalid) {

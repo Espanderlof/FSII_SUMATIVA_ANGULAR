@@ -1,6 +1,8 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
+import { JsonService } from './json.service';
+import { map, catchError, switchMap } from 'rxjs/operators';
 
 /**
  * Interfaz que define la estructura de un usuario
@@ -35,7 +37,10 @@ export class AuthService {
    * Constructor del servicio
    * @param platformId ID de la plataforma para determinar si es un navegador
    */
-  constructor(@Inject(PLATFORM_ID) platformId: Object) {
+  constructor(
+    @Inject(PLATFORM_ID) platformId: Object,
+    private jsonService: JsonService
+  ) {
     this.isBrowser = isPlatformBrowser(platformId);
     this.cargarSesion();
   }
@@ -54,12 +59,15 @@ export class AuthService {
    * Obtiene el usuario actual
    * @returns El usuario actual o null si no hay sesión
    */
+  // getUsuarioActual(): any {
+  //   if (this.isBrowser) {
+  //     const sesionUsuarioJSON = localStorage.getItem('sesionUsuario');
+  //     return sesionUsuarioJSON ? JSON.parse(sesionUsuarioJSON) : null;
+  //   }
+  //   return null;
+  // }
   getUsuarioActual(): any {
-    if (this.isBrowser) {
-      const sesionUsuarioJSON = localStorage.getItem('sesionUsuario');
-      return sesionUsuarioJSON ? JSON.parse(sesionUsuarioJSON) : null;
-    }
-    return null;
+    return this.usuarioActual.value;
   }
 
   /**
@@ -76,28 +84,33 @@ export class AuthService {
    * @param password Contraseña del usuario
    * @returns true si el login es exitoso, false en caso contrario
    */
-  login(email: string, password: string): boolean {
-    if (this.isBrowser) {
-      const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-      const usuarioEncontrado = usuarios.find(
-        (usuario: any) => usuario.email === email && usuario.password === password
-      );
-
-      if (usuarioEncontrado) {
-        const usuarioSinContraseña: Usuario = {
-          email: usuarioEncontrado.email,
-          nombre: usuarioEncontrado.nombre,
-          celular: usuarioEncontrado.celular,
-          fechaNacimiento: usuarioEncontrado.fechaNacimiento,
-          rol: usuarioEncontrado.rol,
-        };
-
-        localStorage.setItem('sesionUsuario', JSON.stringify(usuarioSinContraseña));
-        this.usuarioActual.next(usuarioSinContraseña);
-        return true;
-      }
-    }
-    return false;
+  login(email: string, password: string): Observable<boolean> {
+    return this.jsonService.getJsonUsuariosData().pipe(
+      map(usuarios => {
+        const usuarioEncontrado = usuarios.find(
+          (usuario: any) => usuario.email === email && usuario.password === password
+        );
+        if (usuarioEncontrado) {
+          const usuarioSinContraseña: Usuario = {
+            email: usuarioEncontrado.email,
+            nombre: usuarioEncontrado.nombre,
+            celular: usuarioEncontrado.celular,
+            fechaNacimiento: usuarioEncontrado.fechaNacimiento,
+            rol: usuarioEncontrado.rol,
+          };
+          if (this.isBrowser) {
+            localStorage.setItem('sesionUsuario', JSON.stringify(usuarioSinContraseña));
+          }
+          this.usuarioActual.next(usuarioSinContraseña);
+          return true;
+        }
+        return false;
+      }),
+      catchError(error => {
+        console.error('Error during login:', error);
+        return of(false);
+      })
+    );
   }
 
   /**
@@ -124,18 +137,34 @@ export class AuthService {
    * @param nuevoUsuario Datos del nuevo usuario
    * @returns true si el registro es exitoso, false si el usuario ya existe
    */
-  registrarUsuario(nuevoUsuario: any): boolean {
-    if (this.isBrowser) {
-      let usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-      const usuarioExistente = usuarios.find((u: any) => u.email === nuevoUsuario.email);
-      if (usuarioExistente) {
-        return false;
-      }
-      usuarios.push(nuevoUsuario);
-      localStorage.setItem('usuarios', JSON.stringify(usuarios));
-      return true;
-    }
-    return false;
+  registrarUsuario(nuevoUsuario: any): Observable<boolean> {
+    console.log('Iniciando registro de usuario:', nuevoUsuario);
+    return this.jsonService.getJsonUsuariosData().pipe(
+      switchMap(usuarios => {
+        console.log('Usuarios obtenidos:', usuarios);
+        const usuarioExistente = usuarios.find((u: any) => u.email === nuevoUsuario.email);
+        if (usuarioExistente) {
+          console.log('Usuario ya existe:', nuevoUsuario.email);
+          return of(false);
+        }
+        console.log('Añadiendo nuevo usuario a la lista');
+        usuarios.push(nuevoUsuario);
+        return this.jsonService.MetodoUsuarios(usuarios).pipe(
+          map(() => {
+            console.log('Usuario registrado exitosamente');
+            return true;
+          }),
+          catchError(error => {
+            console.error('Error al guardar usuario en Firebase:', error);
+            return of(false);
+          })
+        );
+      }),
+      catchError(error => {
+        console.error('Error al obtener usuarios:', error);
+        return of(false);
+      })
+    );
   }
 
   /**
@@ -143,18 +172,23 @@ export class AuthService {
    * @param email Email del usuario
    * @returns El token generado o null si el email no existe
    */
-  generarTokenRecuperacion(email: string): string | null {
-    if (this.isBrowser) {
-      const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-      const usuario = usuarios.find((u: any) => u.email === email);
-      if (usuario) {
-        const token = Math.floor(Math.random() * 900000) + 100000;
-        usuario.token = token.toString();
-        localStorage.setItem('usuarios', JSON.stringify(usuarios));
-        return token.toString();
-      }
-    }
-    return null;
+  generarTokenRecuperacion(email: string): Observable<string | null> {
+    return this.jsonService.getJsonUsuariosData().pipe(
+      map(usuarios => {
+        const usuario = usuarios.find((u: any) => u.email === email);
+        if (usuario) {
+          const token = Math.floor(Math.random() * 900000) + 100000;
+          usuario.token = token.toString();
+          this.jsonService.MetodoUsuarios(usuarios);
+          return token.toString();
+        }
+        return null;
+      }),
+      catchError(error => {
+        console.error('Error generating recovery token:', error);
+        return of(null);
+      })
+    );
   }
 
   /**
@@ -164,18 +198,23 @@ export class AuthService {
    * @param newPassword Nueva contraseña
    * @returns true si la recuperación es exitosa, false en caso contrario
    */
-  recuperarPassword(email: string, token: string, newPassword: string): boolean {
-    if (this.isBrowser) {
-      const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-      const usuario = usuarios.find((u: any) => u.email === email && u.token === token);
-      if (usuario) {
-        usuario.password = newPassword;
-        usuario.token = '';
-        localStorage.setItem('usuarios', JSON.stringify(usuarios));
-        return true;
-      }
-    }
-    return false;
+  recuperarPassword(email: string, token: string, newPassword: string): Observable<boolean> {
+    return this.jsonService.getJsonUsuariosData().pipe(
+      map(usuarios => {
+        const usuario = usuarios.find((u: any) => u.email === email && u.token === token);
+        if (usuario) {
+          usuario.password = newPassword;
+          usuario.token = '';
+          this.jsonService.MetodoUsuarios(usuarios);
+          return true;
+        }
+        return false;
+      }),
+      catchError(error => {
+        console.error('Error recovering password:', error);
+        return of(false);
+      })
+    );
   }
 
   /**
@@ -183,34 +222,30 @@ export class AuthService {
    * @param datosActualizados Nuevos datos del perfil
    * @returns true si la actualización es exitosa, false en caso contrario
    */
-  actualizarPerfil(datosActualizados: any): boolean {
-    if (this.isBrowser) {
-      const usuariosJSON = localStorage.getItem('usuarios');
-      if (usuariosJSON) {
-        let usuarios = JSON.parse(usuariosJSON);
+  actualizarPerfil(datosActualizados: any): Observable<boolean> {
+    return this.jsonService.getJsonUsuariosData().pipe(
+      map(usuarios => {
         const sesionUsuario = this.getUsuarioActual();
-
         if (sesionUsuario) {
-          // Actualizar el usuario en el array de usuarios
-          usuarios = usuarios.map((usuario: any) => {
-            if (usuario.email === sesionUsuario.email) {
-              return { ...usuario, ...datosActualizados };
+          const usuarioIndex = usuarios.findIndex((u: any) => u.email === sesionUsuario.email);
+          if (usuarioIndex !== -1) {
+            usuarios[usuarioIndex] = { ...usuarios[usuarioIndex], ...datosActualizados };
+            const usuarioActualizado = { ...sesionUsuario, ...datosActualizados };
+            if (this.isBrowser) {
+              localStorage.setItem('sesionUsuario', JSON.stringify(usuarioActualizado));
             }
-            return usuario;
-          });
-
-          // Actualizar el localStorage
-          localStorage.setItem('usuarios', JSON.stringify(usuarios));
-
-          // Actualizar la sesión del usuario
-          const usuarioActualizado = { ...sesionUsuario, ...datosActualizados };
-          localStorage.setItem('sesionUsuario', JSON.stringify(usuarioActualizado));
-
-          return true;
+            this.usuarioActual.next(usuarioActualizado);
+            this.jsonService.MetodoUsuarios(usuarios);
+            return true;
+          }
         }
-      }
-    }
-    return false;
+        return false;
+      }),
+      catchError(error => {
+        console.error('Error updating profile:', error);
+        return of(false);
+      })
+    );
   }
 
   /**
@@ -218,42 +253,33 @@ export class AuthService {
    * @param newPassword Nueva contraseña
    * @returns true si la actualización es exitosa, false en caso contrario
    */
-  actualizarContraseña(newPassword: string): boolean {
-    if (this.isBrowser) {
-      const usuariosJSON = localStorage.getItem('usuarios');
-      if (usuariosJSON) {
-        let usuarios = JSON.parse(usuariosJSON);
+  actualizarContraseña(newPassword: string): Observable<boolean> {
+    return this.jsonService.getJsonUsuariosData().pipe(
+      map(usuarios => {
         const sesionUsuario = this.getUsuarioActual();
-
         if (sesionUsuario) {
-          // Actualizar la contraseña del usuario en el array de usuarios
-          usuarios = usuarios.map((usuario: any) => {
-            if (usuario.email === sesionUsuario.email) {
-              return { ...usuario, password: newPassword };
-            }
-            return usuario;
-          });
-
-          // Actualizar el localStorage
-          localStorage.setItem('usuarios', JSON.stringify(usuarios));
-
-          return true;
+          const usuarioIndex = usuarios.findIndex((u: any) => u.email === sesionUsuario.email);
+          if (usuarioIndex !== -1) {
+            usuarios[usuarioIndex].password = newPassword;
+            this.jsonService.MetodoUsuarios(usuarios);
+            return true;
+          }
         }
-      }
-    }
-    return false;
+        return false;
+      }),
+      catchError(error => {
+        console.error('Error updating password:', error);
+        return of(false);
+      })
+    );
   }
 
   /**
    * Obtiene la lista de todos los usuarios
    * @returns Array de usuarios
    */
-  getUsuarios(): any[] {
-    if (this.isBrowser) {
-      const usuariosJSON = localStorage.getItem('usuarios');
-      return usuariosJSON ? JSON.parse(usuariosJSON) : [];
-    }
-    return [];
+  getUsuarios(): Observable<any[]> {
+    return this.jsonService.getJsonUsuariosData();
   }
 
   /**
@@ -261,17 +287,22 @@ export class AuthService {
    * @param usuario Datos actualizados del usuario
    * @returns true si la actualización es exitosa, false en caso contrario
    */
-  actualizarUsuario(usuario: any): boolean {
-    if (this.isBrowser) {
-      let usuarios = this.getUsuarios();
-      const index = usuarios.findIndex(u => u.email === usuario.email);
-      if (index !== -1) {
-        usuarios[index] = usuario;
-        localStorage.setItem('usuarios', JSON.stringify(usuarios));
-        return true;
-      }
-    }
-    return false;
+  actualizarUsuario(usuario: any): Observable<boolean> {
+    return this.jsonService.getJsonUsuariosData().pipe(
+      map(usuarios => {
+        const index = usuarios.findIndex((u: any) => u.email === usuario.email);
+        if (index !== -1) {
+          usuarios[index] = usuario;
+          this.jsonService.MetodoUsuarios(usuarios);
+          return true;
+        }
+        return false;
+      }),
+      catchError(error => {
+        console.error('Error updating user:', error);
+        return of(false);
+      })
+    );
   }
 
 }
