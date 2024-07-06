@@ -1,0 +1,26 @@
+[
+    {
+      "id": 1,
+      "nombre": "Plato antianciedad",
+      "descripcion": "Plato antianciedad para perros y gatos. Ayuda a evitar la ansiedad en la comida.",
+      "imagen": "1.jpg",
+      "precio": 6500,
+      "categoria": 3
+    },
+    {
+      "id": 2,
+      "nombre": "Collar pañuelo",
+      "descripcion": "Collar pañuelo para perros. Collar ajustable con pañuelo desmontable.",
+      "imagen": "2.jpg",
+      "precio": 4500,
+      "categoria": 1
+    },
+    {
+      "id": 3,
+      "nombre": "Correa reflectante",
+      "descripcion": "Correa reflectante para perros. Correa ajustable con costuras reflectantes.",
+      "imagen": "3.jpg",
+      "precio": 5500,
+      "categoria": 2
+    }
+]
