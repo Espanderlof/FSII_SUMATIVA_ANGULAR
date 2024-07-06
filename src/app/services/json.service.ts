@@ -12,7 +12,7 @@ export class JsonService {
       'Authorization': 'Bearer 80759020-58e2-44d2-b8b7-c4770cc93d76'
     })
   }
-  private jsonCategoriasUrl = 'https://firebasestorage.googleapis.com/v0/b/fsii-sumativa-angular.appspot.com/o/categorias.json?alt=media&token=80759020-58e2-44d2-b8b7-c4770cc93d76'; 
+  private jsonCategoriasUrl = '/api/v0/b/fsii-sumativa-angular.appspot.com/o/categorias.json?alt=media&token=80759020-58e2-44d2-b8b7-c4770cc93d76'; 
 
   httpOptionsProductos = {
     headers: new HttpHeaders({
@@ -20,7 +20,7 @@ export class JsonService {
       'Authorization': 'Bearer fd5435c0-e522-4ae8-a7eb-e977e471cce7'
     })
   }
-  private jsonProductosUrl = 'https://firebasestorage.googleapis.com/v0/b/fsii-sumativa-angular.appspot.com/o/productos.json?alt=media&token=fd5435c0-e522-4ae8-a7eb-e977e471cce7';
+  private jsonProductosUrl = '/api/v0/b/fsii-sumativa-angular.appspot.com/o/productos.json?alt=media&token=fd5435c0-e522-4ae8-a7eb-e977e471cce7';
 
   httpOptionsUsuarios = {
     headers: new HttpHeaders({
@@ -28,7 +28,7 @@ export class JsonService {
       'Authorization': 'Bearer f11c237d-cda1-41f9-924e-02cfbe260069'
     })
   }
-  private jsonUsuariosUrl = 'https://firebasestorage.googleapis.com/v0/b/fsii-sumativa-angular.appspot.com/o/usuarios.json?alt=media&token=f11c237d-cda1-41f9-924e-02cfbe260069';
+  private jsonUsuariosUrl = '/api/v0/b/fsii-sumativa-angular.appspot.com/o/usuarios.json?alt=media&token=f11c237d-cda1-41f9-924e-02cfbe260069';
 
   constructor(private http: HttpClient) { }
 
