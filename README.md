@@ -1,6 +1,11 @@
 # FSII_SUMATIVA_ANGULAR
 FSII - SUMATIVA - ANGULAR
 
+DOCKER COMANDOS
+- docker build -t albavets .
+- docker run -p 80:80 albavets
+
+
 COMPODOC COMANDOS
 - Comando para generar documentacion: npx compodoc -p tsconfig.json
 - Comando para levantar servidor de documentacion: compodoc -s
