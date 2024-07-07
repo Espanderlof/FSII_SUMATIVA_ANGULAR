@@ -473,8 +473,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="96"
-                                    class="link-to-prism">src/app/components/modificar-perfil/modificar-perfil.component.ts:96</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="108"
+                                    class="link-to-prism">src/app/components/modificar-perfil/modificar-perfil.component.ts:108</a></div>
                         </td>
                     </tr>
 
@@ -798,11 +798,23 @@ export class ModificarPerfilComponent implements OnInit {
   onSubmitPerfil() {
     if (this.perfilForm.valid) {
       const datosActualizados &#x3D; this.perfilForm.value;
-      if (this.authService.actualizarPerfil(datosActualizados)) {
-        alert(&quot;Información personal actualizada correctamente.&quot;);
-      } else {
-        alert(&quot;Hubo un error al actualizar la información.&quot;);
-      }
+      this.authService.actualizarPerfil(datosActualizados).subscribe(
+        (success) &#x3D;&gt; {
+          if (success) {
+            console.log(&#x27;Perfil actualizado con éxito&#x27;);
+            alert(&quot;Información personal actualizada correctamente.&quot;);
+            // Actualizar el usuarioActual en el componente
+            this.usuarioActual &#x3D; this.authService.getUsuarioActual();
+          } else {
+            console.log(&#x27;Error al actualizar el perfil&#x27;);
+            alert(&quot;Hubo un error al actualizar la información.&quot;);
+          }
+        },
+        (error) &#x3D;&gt; {
+          console.error(&#x27;Error al actualizar el perfil:&#x27;, error);
+          alert(&quot;Ocurrió un error al actualizar la información. Por favor, inténtalo de nuevo.&quot;);
+        }
+      );
     }
   }
 
@@ -812,12 +824,22 @@ export class ModificarPerfilComponent implements OnInit {
   onSubmitPassword() {
     if (this.passwordForm.valid) {
       const newPassword &#x3D; this.passwordForm.get(&#x27;newPassword&#x27;)?.value;
-      if (this.authService.actualizarContraseña(newPassword)) {
-        alert(&quot;Contraseña actualizada correctamente.&quot;);
-        this.passwordForm.reset();
-      } else {
-        alert(&quot;Hubo un error al actualizar la contraseña.&quot;);
-      }
+      this.authService.actualizarContraseña(newPassword).subscribe(
+        (success) &#x3D;&gt; {
+          if (success) {
+            console.log(&#x27;Contraseña actualizada con éxito&#x27;);
+            alert(&quot;Contraseña actualizada correctamente.&quot;);
+            this.passwordForm.reset();
+          } else {
+            console.log(&#x27;Error al actualizar la contraseña&#x27;);
+            alert(&quot;Hubo un error al actualizar la contraseña.&quot;);
+          }
+        },
+        (error) &#x3D;&gt; {
+          console.error(&#x27;Error al actualizar la contraseña:&#x27;, error);
+          alert(&quot;Ocurrió un error al actualizar la contraseña. Por favor, inténtalo de nuevo.&quot;);
+        }
+      );
     }
   }
 }</code></pre>

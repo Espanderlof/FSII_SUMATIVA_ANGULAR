@@ -355,8 +355,8 @@ Muestra productos y categorías, permitiendo filtrar y añadir al carrito.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="86"
-                                    class="link-to-prism">src/app/components/home/home.component.ts:86</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">src/app/components/home/home.component.ts:95</a></div>
                         </td>
                     </tr>
 
@@ -429,8 +429,8 @@ Muestra productos y categorías, permitiendo filtrar y añadir al carrito.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="74"
-                                    class="link-to-prism">src/app/components/home/home.component.ts:74</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="83"
+                                    class="link-to-prism">src/app/components/home/home.component.ts:83</a></div>
                         </td>
                     </tr>
 
@@ -581,8 +581,8 @@ Muestra productos y categorías, permitiendo filtrar y añadir al carrito.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="65"
-                                    class="link-to-prism">src/app/components/home/home.component.ts:65</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="74"
+                                    class="link-to-prism">src/app/components/home/home.component.ts:74</a></div>
                         </td>
                     </tr>
 
@@ -885,10 +885,19 @@ export class HomeComponent {
    * Carga los datos de productos y categorías desde el servicio
    */
   loadData() {
-    this.productosService.getData().subscribe(data &#x3D;&gt; {
-      this.categorias &#x3D; [...data.categorias];
-      this.productos &#x3D; data.productos;
-      this.filterProducts(0);
+    this.productosService.getData().subscribe({
+      next: (data) &#x3D;&gt; {
+        if (data &amp;&amp; Array.isArray(data.categorias) &amp;&amp; Array.isArray(data.productos)) {
+          this.categorias &#x3D; [...data.categorias];
+          this.productos &#x3D; data.productos;
+          this.filterProducts(0);
+        } else {
+          console.error(&#x27;Data structure is not as expected:&#x27;, data);
+        }
+      },
+      error: (error) &#x3D;&gt; {
+        console.error(&#x27;Error loading data:&#x27;, error);
+      }
     });
   }
 

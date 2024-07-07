@@ -119,13 +119,6 @@
         </p>
 
 
-            <p class="comment">
-                <h3>Description</h3>
-            </p>
-            <p class="comment">
-                <p>Servicio para inicializar datos de la aplicación desde un archivo JSON</p>
-
-            </p>
 
 
 
@@ -178,19 +171,17 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(http: HttpClient, platformId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank">Object</a>)</code>
+<code>constructor(jsonService: <a href="../injectables/JsonService.html" target="_self">JsonService</a>, platformId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank">Object</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/services/data-initialization.service.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/services/data-initialization.service.ts:10</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Constructor del servicio</p>
-</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -199,25 +190,20 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
-                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>http</td>
+                                                        <td>jsonService</td>
                                                   
                                                         <td>
-                                                                    <code>HttpClient</code>
+                                                                        <code><a href="../injectables/JsonService.html" target="_self" >JsonService</a></code>
                                                         </td>
                                                   
                                                     <td>
                                                             No
                                                     </td>
                                                     
-                                                        <td>
-                                                                <p>Cliente HTTP para realizar peticiones</p>
-
-                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>platformId</td>
@@ -230,10 +216,6 @@
                                                             No
                                                     </td>
                                                     
-                                                        <td>
-                                                                <p>ID de la plataforma para determinar si es un navegador</p>
-
-                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -269,25 +251,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="32"
-                                    class="link-to-prism">src/app/services/data-initialization.service.ts:32</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="19"
+                                    class="link-to-prism">src/app/services/data-initialization.service.ts:19</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Inicializa los datos de la aplicación</p>
-</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
-                            <div class="io-description">
-                                <p>Una promesa que se resuelve cuando los datos se han inicializado</p>
-
-                            </div>
                 </td>
             </tr>
         </tbody>
@@ -318,16 +294,10 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/services/data-initialization.service.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/services/data-initialization.service.ts:10</a></div>
                         </td>
                     </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Indica si el código se está ejecutando en un navegador</p>
-</div>
-                </td>
-            </tr>
 
         </tbody>
     </table>
@@ -338,44 +308,35 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, Inject, PLATFORM_ID } from &#x27;@angular/core&#x27;;
-import { HttpClient } from &#x27;@angular/common/http&#x27;;
 import { isPlatformBrowser } from &#x27;@angular/common&#x27;;
+import { JsonService } from &#x27;./json.service&#x27;;
+import { forkJoin } from &#x27;rxjs&#x27;;
 
-/**
- * @description
- * Servicio para inicializar datos de la aplicación desde un archivo JSON
- */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 export class DataInitializationService {
-  /** Indica si el código se está ejecutando en un navegador */
   private isBrowser: boolean;
 
-  /**
-   * Constructor del servicio
-   * @param http Cliente HTTP para realizar peticiones
-   * @param platformId ID de la plataforma para determinar si es un navegador
-   */
   constructor(
-    private http: HttpClient,
+    private jsonService: JsonService,
     @Inject(PLATFORM_ID) platformId: Object
   ) {
     this.isBrowser &#x3D; isPlatformBrowser(platformId);
   }
 
-  /**
-   * Inicializa los datos de la aplicación
-   * @returns Una promesa que se resuelve cuando los datos se han inicializado
-   */
   initializeData() {
     return new Promise&lt;void&gt;((resolve, reject) &#x3D;&gt; {
-      this.http.get(&#x27;assets/db/albavetsDB.json&#x27;).subscribe({
+      forkJoin({
+        usuarios: this.jsonService.getJsonUsuariosData(),
+        categorias: this.jsonService.getJsonCategoriasData(),
+        productos: this.jsonService.getJsonProductosData()
+      }).subscribe({
         next: (data: any) &#x3D;&gt; {
           if (this.isBrowser) {
-            if (!localStorage.getItem(&#x27;usuarios&#x27;)) {
-              localStorage.setItem(&#x27;usuarios&#x27;, JSON.stringify(data.usuarios));
-            }
+            // if (!localStorage.getItem(&#x27;usuarios&#x27;)) {
+            //   localStorage.setItem(&#x27;usuarios&#x27;, JSON.stringify(data.usuarios));
+            // }
             if (!localStorage.getItem(&#x27;categorias&#x27;)) {
               localStorage.setItem(&#x27;categorias&#x27;, JSON.stringify(data.categorias));
             }

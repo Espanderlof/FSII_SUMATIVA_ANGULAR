@@ -513,12 +513,20 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       const { email, password } &#x3D; this.loginForm.value;
 
-      if (this.authService.login(email, password)) {
-        alert(&quot;¡Inicio de sesión exitoso!&quot;);
-        this.router.navigate([&#x27;/&#x27;]);
-      } else {
-        alert(&quot;Correo electrónico o contraseña incorrectos. Por favor, intenta nuevamente.&quot;);
-      }
+      this.authService.login(email, password).subscribe(
+        (success) &#x3D;&gt; {
+          if (success) {
+            alert(&quot;¡Inicio de sesión exitoso!&quot;);
+            this.router.navigate([&#x27;/&#x27;]);
+          } else {
+            alert(&quot;Correo electrónico o contraseña incorrectos. Por favor, intenta nuevamente.&quot;);
+          }
+        },
+        (error) &#x3D;&gt; {
+          console.error(&#x27;Error durante el inicio de sesión:&#x27;, error);
+          alert(&quot;Ocurrió un error durante el inicio de sesión. Por favor, inténtalo de nuevo.&quot;);
+        }
+      );
     } else {
       Object.values(this.loginForm.controls).forEach(control &#x3D;&gt; {
         if (control.invalid) {

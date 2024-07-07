@@ -100,6 +100,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     <a href="injectables/DataInitializationService.html" data-type="entity-link" >DataInitializationService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="injectables/JsonService.html" data-type="entity-link" >JsonService</a>
+                                </li>
+                                <li class="link">
                                     <a href="injectables/ProductosService.html" data-type="entity-link" >ProductosService</a>
                                 </li>
                             </ul>

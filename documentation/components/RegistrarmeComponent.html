@@ -710,12 +710,20 @@ export class RegistrarmeComponent implements OnInit {
         token: &#x27;&#x27;
       };
 
-      if (this.authService.registrarUsuario(nuevoUsuario)) {
-        alert(&quot;¡Usuario registrado correctamente!&quot;);
-        this.router.navigate([&#x27;/login&#x27;]);
-      } else {
-        alert(&quot;El usuario ya está registrado. Por favor, inicia sesión o utiliza otro correo electrónico.&quot;);
-      }
+      this.authService.registrarUsuario(nuevoUsuario).subscribe(
+        (success) &#x3D;&gt; {
+          if (success) {
+            alert(&quot;¡Usuario registrado correctamente!&quot;);
+            this.router.navigate([&#x27;/login&#x27;]);
+          } else {
+            alert(&quot;El usuario ya está registrado. Por favor, inicia sesión o utiliza otro correo electrónico.&quot;);
+          }
+        },
+        (error) &#x3D;&gt; {
+          console.error(&#x27;Error durante el registro:&#x27;, error);
+          alert(&quot;Ocurrió un error durante el registro. Por favor, inténtalo de nuevo.&quot;);
+        }
+      );
     } else {
       Object.values(this.registroForm.controls).forEach(control &#x3D;&gt; {
         if (control.invalid) {

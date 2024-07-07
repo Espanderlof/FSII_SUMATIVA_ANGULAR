@@ -174,6 +174,9 @@
                                 <a href="#cargarSesion" >cargarSesion</a>
                             </li>
                             <li>
+                                <a href="#eliminarUsuario" >eliminarUsuario</a>
+                            </li>
+                            <li>
                                 <a href="#esAdministrador" >esAdministrador</a>
                             </li>
                             <li>
@@ -218,12 +221,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(platformId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank">Object</a>)</code>
+<code>constructor(platformId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank">Object</a>, jsonService: <a href="../injectables/JsonService.html" target="_self">JsonService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/services/auth.service.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/services/auth.service.ts:34</a></div>
                             </td>
                         </tr>
 
@@ -257,6 +260,20 @@
                                                         <td>
                                                                 <p>ID de la plataforma para determinar si es un navegador</p>
 
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>jsonService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/JsonService.html" target="_self" >JsonService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
                                                         </td>
                                                 </tr>
                                         </tbody>
@@ -293,8 +310,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="221"
-                                    class="link-to-prism">src/app/services/auth.service.ts:221</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="297"
+                                    class="link-to-prism">src/app/services/auth.service.ts:297</a></div>
                         </td>
                     </tr>
 
@@ -337,7 +354,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                            <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
 
                         </div>
                             <div class="io-description">
@@ -368,8 +385,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="186"
-                                    class="link-to-prism">src/app/services/auth.service.ts:186</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="263"
+                                    class="link-to-prism">src/app/services/auth.service.ts:263</a></div>
                         </td>
                     </tr>
 
@@ -412,7 +429,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                            <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
 
                         </div>
                             <div class="io-description">
@@ -443,8 +460,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="264"
-                                    class="link-to-prism">src/app/services/auth.service.ts:264</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="342"
+                                    class="link-to-prism">src/app/services/auth.service.ts:342</a></div>
                         </td>
                     </tr>
 
@@ -487,7 +504,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                            <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
 
                         </div>
                             <div class="io-description">
@@ -518,8 +535,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="46"
-                                    class="link-to-prism">src/app/services/auth.service.ts:46</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="51"
+                                    class="link-to-prism">src/app/services/auth.service.ts:51</a></div>
                         </td>
                     </tr>
 
@@ -533,6 +550,81 @@
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="eliminarUsuario"></a>
+                    <span class="name">
+                        <span ><b>eliminarUsuario</b></span>
+                        <a href="#eliminarUsuario"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>eliminarUsuario(email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="373"
+                                    class="link-to-prism">src/app/services/auth.service.ts:373</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>elimina un usuario</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>email</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Email del usuario a eliminar</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>true si la eliminación es exitosa, false en caso contrario</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -557,8 +649,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="117"
-                                    class="link-to-prism">src/app/services/auth.service.ts:117</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="123"
+                                    class="link-to-prism">src/app/services/auth.service.ts:123</a></div>
                         </td>
                     </tr>
 
@@ -600,8 +692,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="146"
-                                    class="link-to-prism">src/app/services/auth.service.ts:146</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="180"
+                                    class="link-to-prism">src/app/services/auth.service.ts:180</a></div>
                         </td>
                     </tr>
 
@@ -644,7 +736,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>string | null</code>
+                            <b>Returns : </b>    <code>Observable&lt;string | null&gt;</code>
 
                         </div>
                             <div class="io-description">
@@ -675,8 +767,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="57"
-                                    class="link-to-prism">src/app/services/auth.service.ts:57</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="62"
+                                    class="link-to-prism">src/app/services/auth.service.ts:62</a></div>
                         </td>
                     </tr>
 
@@ -718,8 +810,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="69"
-                                    class="link-to-prism">src/app/services/auth.service.ts:69</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="70"
+                                    class="link-to-prism">src/app/services/auth.service.ts:70</a></div>
                         </td>
                     </tr>
 
@@ -761,8 +853,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="251"
-                                    class="link-to-prism">src/app/services/auth.service.ts:251</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="333"
+                                    class="link-to-prism">src/app/services/auth.service.ts:333</a></div>
                         </td>
                     </tr>
 
@@ -773,7 +865,7 @@
 </div>
 
                         <div class="io-description">
-                            <b>Returns : </b>    <code>any[]</code>
+                            <b>Returns : </b>    <code>Observable&lt;any[]&gt;</code>
 
                         </div>
                             <div class="io-description">
@@ -804,8 +896,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="79"
-                                    class="link-to-prism">src/app/services/auth.service.ts:79</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">src/app/services/auth.service.ts:80</a></div>
                         </td>
                     </tr>
 
@@ -864,7 +956,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                            <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
 
                         </div>
                             <div class="io-description">
@@ -895,8 +987,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="106"
-                                    class="link-to-prism">src/app/services/auth.service.ts:106</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="112"
+                                    class="link-to-prism">src/app/services/auth.service.ts:112</a></div>
                         </td>
                     </tr>
 
@@ -934,8 +1026,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="167"
-                                    class="link-to-prism">src/app/services/auth.service.ts:167</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="219"
+                                    class="link-to-prism">src/app/services/auth.service.ts:219</a></div>
                         </td>
                     </tr>
 
@@ -1010,7 +1102,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                            <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
 
                         </div>
                             <div class="io-description">
@@ -1041,8 +1133,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="127"
-                                    class="link-to-prism">src/app/services/auth.service.ts:127</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="133"
+                                    class="link-to-prism">src/app/services/auth.service.ts:133</a></div>
                         </td>
                     </tr>
 
@@ -1085,7 +1177,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                            <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
 
                         </div>
                             <div class="io-description">
@@ -1122,7 +1214,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/services/auth.service.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/services/auth.service.ts:34</a></div>
                         </td>
                     </tr>
 
@@ -1154,7 +1246,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/services/auth.service.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/services/auth.service.ts:32</a></div>
                         </td>
                     </tr>
 
@@ -1174,8 +1266,10 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, Inject, PLATFORM_ID } from &#x27;@angular/core&#x27;;
-import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
-import { isPlatformBrowser } from &#x27;@angular/common&#x27;;
+import { BehaviorSubject, Observable, of, throwError } from &#x27;rxjs&#x27;;
+import { isPlatformBrowser, } from &#x27;@angular/common&#x27;;
+import { JsonService } from &#x27;./json.service&#x27;;
+import { map, catchError, switchMap, tap } from &#x27;rxjs/operators&#x27;;
 
 /**
  * Interfaz que define la estructura de un usuario
@@ -1210,7 +1304,10 @@ export class AuthService {
    * Constructor del servicio
    * @param platformId ID de la plataforma para determinar si es un navegador
    */
-  constructor(@Inject(PLATFORM_ID) platformId: Object) {
+  constructor(
+    @Inject(PLATFORM_ID) platformId: Object,
+    private jsonService: JsonService
+  ) {
     this.isBrowser &#x3D; isPlatformBrowser(platformId);
     this.cargarSesion();
   }
@@ -1230,11 +1327,7 @@ export class AuthService {
    * @returns El usuario actual o null si no hay sesión
    */
   getUsuarioActual(): any {
-    if (this.isBrowser) {
-      const sesionUsuarioJSON &#x3D; localStorage.getItem(&#x27;sesionUsuario&#x27;);
-      return sesionUsuarioJSON ? JSON.parse(sesionUsuarioJSON) : null;
-    }
-    return null;
+    return this.usuarioActual.value;
   }
 
   /**
@@ -1251,28 +1344,33 @@ export class AuthService {
    * @param password Contraseña del usuario
    * @returns true si el login es exitoso, false en caso contrario
    */
-  login(email: string, password: string): boolean {
-    if (this.isBrowser) {
-      const usuarios &#x3D; JSON.parse(localStorage.getItem(&#x27;usuarios&#x27;) || &#x27;[]&#x27;);
-      const usuarioEncontrado &#x3D; usuarios.find(
-        (usuario: any) &#x3D;&gt; usuario.email &#x3D;&#x3D;&#x3D; email &amp;&amp; usuario.password &#x3D;&#x3D;&#x3D; password
-      );
-
-      if (usuarioEncontrado) {
-        const usuarioSinContraseña: Usuario &#x3D; {
-          email: usuarioEncontrado.email,
-          nombre: usuarioEncontrado.nombre,
-          celular: usuarioEncontrado.celular,
-          fechaNacimiento: usuarioEncontrado.fechaNacimiento,
-          rol: usuarioEncontrado.rol,
-        };
-
-        localStorage.setItem(&#x27;sesionUsuario&#x27;, JSON.stringify(usuarioSinContraseña));
-        this.usuarioActual.next(usuarioSinContraseña);
-        return true;
-      }
-    }
-    return false;
+  login(email: string, password: string): Observable&lt;boolean&gt; {
+    return this.jsonService.getJsonUsuariosData().pipe(
+      map(usuarios &#x3D;&gt; {
+        const usuarioEncontrado &#x3D; usuarios.find(
+          (usuario: any) &#x3D;&gt; usuario.email &#x3D;&#x3D;&#x3D; email &amp;&amp; usuario.password &#x3D;&#x3D;&#x3D; password
+        );
+        if (usuarioEncontrado) {
+          const usuarioSinContraseña: Usuario &#x3D; {
+            email: usuarioEncontrado.email,
+            nombre: usuarioEncontrado.nombre,
+            celular: usuarioEncontrado.celular,
+            fechaNacimiento: usuarioEncontrado.fechaNacimiento,
+            rol: usuarioEncontrado.rol,
+          };
+          if (this.isBrowser) {
+            localStorage.setItem(&#x27;sesionUsuario&#x27;, JSON.stringify(usuarioSinContraseña));
+          }
+          this.usuarioActual.next(usuarioSinContraseña);
+          return true;
+        }
+        return false;
+      }),
+      catchError(error &#x3D;&gt; {
+        console.error(&#x27;Error during login:&#x27;, error);
+        return of(false);
+      })
+    );
   }
 
   /**
@@ -1299,18 +1397,46 @@ export class AuthService {
    * @param nuevoUsuario Datos del nuevo usuario
    * @returns true si el registro es exitoso, false si el usuario ya existe
    */
-  registrarUsuario(nuevoUsuario: any): boolean {
-    if (this.isBrowser) {
-      let usuarios &#x3D; JSON.parse(localStorage.getItem(&#x27;usuarios&#x27;) || &#x27;[]&#x27;);
-      const usuarioExistente &#x3D; usuarios.find((u: any) &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; nuevoUsuario.email);
-      if (usuarioExistente) {
-        return false;
-      }
-      usuarios.push(nuevoUsuario);
-      localStorage.setItem(&#x27;usuarios&#x27;, JSON.stringify(usuarios));
-      return true;
-    }
-    return false;
+  registrarUsuario(nuevoUsuario: any): Observable&lt;boolean&gt; {
+    console.log(&#x27;Iniciando registro de usuario:&#x27;, nuevoUsuario);
+    return this.jsonService.getJsonUsuariosData().pipe(
+      switchMap(usuarios &#x3D;&gt; {
+        console.log(&#x27;Usuarios obtenidos:&#x27;, usuarios);
+        const usuarioExistente &#x3D; usuarios.find((u: any) &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; nuevoUsuario.email);
+        if (usuarioExistente) {
+          console.log(&#x27;Usuario ya existe:&#x27;, nuevoUsuario.email);
+          return of(false);
+        }
+        console.log(&#x27;Añadiendo nuevo usuario a la lista&#x27;);
+        
+        // Creamos un nuevo objeto de usuario sin el campo repetirPassword
+        const usuarioParaGuardar &#x3D; {
+          email: nuevoUsuario.email,
+          nombre: nuevoUsuario.nombre,
+          celular: nuevoUsuario.celular,
+          fechaNacimiento: nuevoUsuario.fechaNacimiento,
+          password: nuevoUsuario.password,
+          rol: nuevoUsuario.rol,
+          token: nuevoUsuario.token
+        };
+  
+        usuarios.push(usuarioParaGuardar);
+        return this.jsonService.MetodoUsuarios(usuarios).pipe(
+          map(() &#x3D;&gt; {
+            console.log(&#x27;Usuario registrado exitosamente&#x27;);
+            return true;
+          }),
+          catchError(error &#x3D;&gt; {
+            console.error(&#x27;Error al guardar usuario en Firebase:&#x27;, error);
+            return of(false);
+          })
+        );
+      }),
+      catchError(error &#x3D;&gt; {
+        console.error(&#x27;Error al obtener usuarios:&#x27;, error);
+        return of(false);
+      })
+    );
   }
 
   /**
@@ -1318,18 +1444,36 @@ export class AuthService {
    * @param email Email del usuario
    * @returns El token generado o null si el email no existe
    */
-  generarTokenRecuperacion(email: string): string | null {
-    if (this.isBrowser) {
-      const usuarios &#x3D; JSON.parse(localStorage.getItem(&#x27;usuarios&#x27;) || &#x27;[]&#x27;);
-      const usuario &#x3D; usuarios.find((u: any) &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; email);
-      if (usuario) {
-        const token &#x3D; Math.floor(Math.random() * 900000) + 100000;
-        usuario.token &#x3D; token.toString();
-        localStorage.setItem(&#x27;usuarios&#x27;, JSON.stringify(usuarios));
-        return token.toString();
-      }
-    }
-    return null;
+  generarTokenRecuperacion(email: string): Observable&lt;string | null&gt; {
+    return this.jsonService.getJsonUsuariosData().pipe(
+      switchMap(usuarios &#x3D;&gt; {
+        const usuario &#x3D; usuarios.find((u: any) &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; email);
+        if (usuario) {
+          const token &#x3D; Math.floor(Math.random() * 900000) + 100000;
+          usuario.token &#x3D; token.toString();
+          console.log(&#x27;Usuario actualizado:&#x27;, usuario);
+          
+          // Actualizamos la lista de usuarios
+          const usuariosActualizados &#x3D; usuarios.map((u: any) &#x3D;&gt; 
+            u.email &#x3D;&#x3D;&#x3D; email ? usuario : u
+          );
+
+          // Sobrescribimos todo el archivo JSON
+          return this.jsonService.MetodoUsuarios(usuariosActualizados).pipe(
+            map(() &#x3D;&gt; token.toString()),
+            catchError(error &#x3D;&gt; {
+              console.error(&#x27;Error al guardar el token en Firebase:&#x27;, error);
+              return of(null);
+            })
+          );
+        }
+        return of(null);
+      }),
+      catchError(error &#x3D;&gt; {
+        console.error(&#x27;Error al generar el token de recuperación:&#x27;, error);
+        return of(null);
+      })
+    );
   }
 
   /**
@@ -1339,18 +1483,43 @@ export class AuthService {
    * @param newPassword Nueva contraseña
    * @returns true si la recuperación es exitosa, false en caso contrario
    */
-  recuperarPassword(email: string, token: string, newPassword: string): boolean {
-    if (this.isBrowser) {
-      const usuarios &#x3D; JSON.parse(localStorage.getItem(&#x27;usuarios&#x27;) || &#x27;[]&#x27;);
-      const usuario &#x3D; usuarios.find((u: any) &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; email &amp;&amp; u.token &#x3D;&#x3D;&#x3D; token);
-      if (usuario) {
-        usuario.password &#x3D; newPassword;
-        usuario.token &#x3D; &#x27;&#x27;;
-        localStorage.setItem(&#x27;usuarios&#x27;, JSON.stringify(usuarios));
-        return true;
-      }
-    }
-    return false;
+  recuperarPassword(email: string, token: string, newPassword: string): Observable&lt;boolean&gt; {
+    return this.jsonService.getJsonUsuariosData().pipe(
+      switchMap(usuarios &#x3D;&gt; {
+        const usuario &#x3D; usuarios.find((u: any) &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; email &amp;&amp; u.token &#x3D;&#x3D;&#x3D; token);
+        if (usuario) {
+          // Actualizamos solo los campos necesarios
+          const usuarioActualizado &#x3D; {
+            ...usuario,
+            password: newPassword,
+            token: &#x27;&#x27;
+          };
+          // Eliminamos el campo repetirPassword si existe
+          delete usuarioActualizado.repetirPassword;
+
+          console.log(&#x27;Usuario actualizado:&#x27;, usuarioActualizado);
+          
+          // Actualizamos la lista de usuarios
+          const usuariosActualizados &#x3D; usuarios.map((u: any) &#x3D;&gt; 
+            u.email &#x3D;&#x3D;&#x3D; email ? usuarioActualizado : u
+          );
+
+          // Sobrescribimos todo el archivo JSON
+          return this.jsonService.MetodoUsuarios(usuariosActualizados).pipe(
+            map(() &#x3D;&gt; true),
+            catchError(error &#x3D;&gt; {
+              console.error(&#x27;Error al guardar la nueva contraseña en Firebase:&#x27;, error);
+              return of(false);
+            })
+          );
+        }
+        return of(false);
+      }),
+      catchError(error &#x3D;&gt; {
+        console.error(&#x27;Error al recuperar la contraseña:&#x27;, error);
+        return of(false);
+      })
+    );
   }
 
   /**
@@ -1358,34 +1527,33 @@ export class AuthService {
    * @param datosActualizados Nuevos datos del perfil
    * @returns true si la actualización es exitosa, false en caso contrario
    */
-  actualizarPerfil(datosActualizados: any): boolean {
-    if (this.isBrowser) {
-      const usuariosJSON &#x3D; localStorage.getItem(&#x27;usuarios&#x27;);
-      if (usuariosJSON) {
-        let usuarios &#x3D; JSON.parse(usuariosJSON);
+  actualizarPerfil(datosActualizados: any): Observable&lt;boolean&gt; {
+    return this.jsonService.getJsonUsuariosData().pipe(
+      switchMap(usuarios &#x3D;&gt; {
         const sesionUsuario &#x3D; this.getUsuarioActual();
-
         if (sesionUsuario) {
-          // Actualizar el usuario en el array de usuarios
-          usuarios &#x3D; usuarios.map((usuario: any) &#x3D;&gt; {
-            if (usuario.email &#x3D;&#x3D;&#x3D; sesionUsuario.email) {
-              return { ...usuario, ...datosActualizados };
-            }
-            return usuario;
-          });
-
-          // Actualizar el localStorage
-          localStorage.setItem(&#x27;usuarios&#x27;, JSON.stringify(usuarios));
-
-          // Actualizar la sesión del usuario
-          const usuarioActualizado &#x3D; { ...sesionUsuario, ...datosActualizados };
-          localStorage.setItem(&#x27;sesionUsuario&#x27;, JSON.stringify(usuarioActualizado));
-
-          return true;
+          const usuarioIndex &#x3D; usuarios.findIndex((u: any) &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; sesionUsuario.email);
+          if (usuarioIndex !&#x3D;&#x3D; -1) {
+            usuarios[usuarioIndex] &#x3D; { ...usuarios[usuarioIndex], ...datosActualizados };
+            return this.jsonService.MetodoUsuarios(usuarios).pipe(
+              tap(() &#x3D;&gt; {
+                const usuarioActualizado &#x3D; { ...sesionUsuario, ...datosActualizados };
+                if (this.isBrowser) {
+                  localStorage.setItem(&#x27;sesionUsuario&#x27;, JSON.stringify(usuarioActualizado));
+                }
+                this.usuarioActual.next(usuarioActualizado);
+              }),
+              map(() &#x3D;&gt; true)
+            );
+          }
         }
-      }
-    }
-    return false;
+        return of(false);
+      }),
+      catchError(error &#x3D;&gt; {
+        console.error(&#x27;Error updating profile:&#x27;, error);
+        return of(false);
+      })
+    );
   }
 
   /**
@@ -1393,42 +1561,44 @@ export class AuthService {
    * @param newPassword Nueva contraseña
    * @returns true si la actualización es exitosa, false en caso contrario
    */
-  actualizarContraseña(newPassword: string): boolean {
-    if (this.isBrowser) {
-      const usuariosJSON &#x3D; localStorage.getItem(&#x27;usuarios&#x27;);
-      if (usuariosJSON) {
-        let usuarios &#x3D; JSON.parse(usuariosJSON);
+  actualizarContraseña(newPassword: string): Observable&lt;boolean&gt; {
+    return this.jsonService.getJsonUsuariosData().pipe(
+      switchMap(usuarios &#x3D;&gt; {
         const sesionUsuario &#x3D; this.getUsuarioActual();
-
         if (sesionUsuario) {
-          // Actualizar la contraseña del usuario en el array de usuarios
-          usuarios &#x3D; usuarios.map((usuario: any) &#x3D;&gt; {
-            if (usuario.email &#x3D;&#x3D;&#x3D; sesionUsuario.email) {
-              return { ...usuario, password: newPassword };
-            }
-            return usuario;
-          });
-
-          // Actualizar el localStorage
-          localStorage.setItem(&#x27;usuarios&#x27;, JSON.stringify(usuarios));
-
-          return true;
+          const usuarioIndex &#x3D; usuarios.findIndex((u: any) &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; sesionUsuario.email);
+          if (usuarioIndex !&#x3D;&#x3D; -1) {
+            usuarios[usuarioIndex] &#x3D; {
+              ...usuarios[usuarioIndex],
+              password: newPassword
+            };
+            return this.jsonService.MetodoUsuarios(usuarios).pipe(
+              map(() &#x3D;&gt; {
+                console.log(&#x27;Contraseña actualizada correctamente&#x27;);
+                return true;
+              }),
+              catchError(error &#x3D;&gt; {
+                console.error(&#x27;Error al actualizar la contraseña en Firebase:&#x27;, error);
+                return of(false);
+              })
+            );
+          }
         }
-      }
-    }
-    return false;
+        return of(false);
+      }),
+      catchError(error &#x3D;&gt; {
+        console.error(&#x27;Error al obtener usuarios:&#x27;, error);
+        return of(false);
+      })
+    );
   }
 
   /**
    * Obtiene la lista de todos los usuarios
    * @returns Array de usuarios
    */
-  getUsuarios(): any[] {
-    if (this.isBrowser) {
-      const usuariosJSON &#x3D; localStorage.getItem(&#x27;usuarios&#x27;);
-      return usuariosJSON ? JSON.parse(usuariosJSON) : [];
-    }
-    return [];
+  getUsuarios(): Observable&lt;any[]&gt; {
+    return this.jsonService.getJsonUsuariosData();
   }
 
   /**
@@ -1436,18 +1606,62 @@ export class AuthService {
    * @param usuario Datos actualizados del usuario
    * @returns true si la actualización es exitosa, false en caso contrario
    */
-  actualizarUsuario(usuario: any): boolean {
-    if (this.isBrowser) {
-      let usuarios &#x3D; this.getUsuarios();
-      const index &#x3D; usuarios.findIndex(u &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; usuario.email);
-      if (index !&#x3D;&#x3D; -1) {
-        usuarios[index] &#x3D; usuario;
-        localStorage.setItem(&#x27;usuarios&#x27;, JSON.stringify(usuarios));
-        return true;
-      }
-    }
-    return false;
+  actualizarUsuario(usuario: any): Observable&lt;boolean&gt; {
+    return this.jsonService.getJsonUsuariosData().pipe(
+      switchMap(usuarios &#x3D;&gt; {
+        const index &#x3D; usuarios.findIndex((u: any) &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; usuario.email);
+        if (index !&#x3D;&#x3D; -1) {
+          usuarios[index] &#x3D; { ...usuarios[index], ...usuario };
+          return this.jsonService.MetodoUsuarios(usuarios).pipe(
+            map(() &#x3D;&gt; {
+              console.log(&#x27;Usuario actualizado correctamente&#x27;);
+              return true;
+            }),
+            catchError(error &#x3D;&gt; {
+              console.error(&#x27;Error al actualizar usuario en Firebase:&#x27;, error);
+              return of(false);
+            })
+          );
+        }
+        return of(false);
+      }),
+      catchError(error &#x3D;&gt; {
+        console.error(&#x27;Error al obtener usuarios:&#x27;, error);
+        return of(false);
+      })
+    );
   }
+
+  /**
+   * elimina un usuario
+   * @param email Email del usuario a eliminar
+   * @returns true si la eliminación es exitosa, false en caso contrario
+   */
+  eliminarUsuario(email: string): Observable&lt;boolean&gt; {
+    return this.jsonService.getJsonUsuariosData().pipe(
+      switchMap(usuarios &#x3D;&gt; {
+        const index &#x3D; usuarios.findIndex((u: any) &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; email);
+        if (index !&#x3D;&#x3D; -1) {
+          usuarios.splice(index, 1);
+          return this.jsonService.MetodoUsuarios(usuarios).pipe(
+            map(() &#x3D;&gt; {
+              console.log(&#x27;Usuario eliminado correctamente&#x27;);
+              return true;
+            }),
+            catchError(error &#x3D;&gt; {
+              console.error(&#x27;Error al eliminar usuario en Firebase:&#x27;, error);
+              return of(false);
+            })
+          );
+        }
+        return of(false);
+      }),
+      catchError(error &#x3D;&gt; {
+        console.error(&#x27;Error al obtener usuarios:&#x27;, error);
+        return of(false);
+      })
+    );
+  }  
 
 }</code></pre>
     </div>
