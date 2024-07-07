@@ -1,8 +1,8 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, } from '@angular/common';
 import { JsonService } from './json.service';
-import { map, catchError, switchMap } from 'rxjs/operators';
+import { map, catchError, switchMap, tap } from 'rxjs/operators';
 
 /**
  * Interfaz que define la estructura de un usuario
@@ -269,22 +269,25 @@ export class AuthService {
    */
   actualizarPerfil(datosActualizados: any): Observable<boolean> {
     return this.jsonService.getJsonUsuariosData().pipe(
-      map(usuarios => {
+      switchMap(usuarios => {
         const sesionUsuario = this.getUsuarioActual();
         if (sesionUsuario) {
           const usuarioIndex = usuarios.findIndex((u: any) => u.email === sesionUsuario.email);
           if (usuarioIndex !== -1) {
             usuarios[usuarioIndex] = { ...usuarios[usuarioIndex], ...datosActualizados };
-            const usuarioActualizado = { ...sesionUsuario, ...datosActualizados };
-            if (this.isBrowser) {
-              localStorage.setItem('sesionUsuario', JSON.stringify(usuarioActualizado));
-            }
-            this.usuarioActual.next(usuarioActualizado);
-            this.jsonService.MetodoUsuarios(usuarios);
-            return true;
+            return this.jsonService.MetodoUsuarios(usuarios).pipe(
+              tap(() => {
+                const usuarioActualizado = { ...sesionUsuario, ...datosActualizados };
+                if (this.isBrowser) {
+                  localStorage.setItem('sesionUsuario', JSON.stringify(usuarioActualizado));
+                }
+                this.usuarioActual.next(usuarioActualizado);
+              }),
+              map(() => true)
+            );
           }
         }
-        return false;
+        return of(false);
       }),
       catchError(error => {
         console.error('Error updating profile:', error);
@@ -300,20 +303,31 @@ export class AuthService {
    */
   actualizarContraseña(newPassword: string): Observable<boolean> {
     return this.jsonService.getJsonUsuariosData().pipe(
-      map(usuarios => {
+      switchMap(usuarios => {
         const sesionUsuario = this.getUsuarioActual();
         if (sesionUsuario) {
           const usuarioIndex = usuarios.findIndex((u: any) => u.email === sesionUsuario.email);
           if (usuarioIndex !== -1) {
-            usuarios[usuarioIndex].password = newPassword;
-            this.jsonService.MetodoUsuarios(usuarios);
-            return true;
+            usuarios[usuarioIndex] = {
+              ...usuarios[usuarioIndex],
+              password: newPassword
+            };
+            return this.jsonService.MetodoUsuarios(usuarios).pipe(
+              map(() => {
+                console.log('Contraseña actualizada correctamente');
+                return true;
+              }),
+              catchError(error => {
+                console.error('Error al actualizar la contraseña en Firebase:', error);
+                return of(false);
+              })
+            );
           }
         }
-        return false;
+        return of(false);
       }),
       catchError(error => {
-        console.error('Error updating password:', error);
+        console.error('Error al obtener usuarios:', error);
         return of(false);
       })
     );

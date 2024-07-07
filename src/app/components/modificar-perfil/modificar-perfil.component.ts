@@ -82,11 +82,23 @@ export class ModificarPerfilComponent implements OnInit {
   onSubmitPerfil() {
     if (this.perfilForm.valid) {
       const datosActualizados = this.perfilForm.value;
-      if (this.authService.actualizarPerfil(datosActualizados)) {
-        alert("Información personal actualizada correctamente.");
-      } else {
-        alert("Hubo un error al actualizar la información.");
-      }
+      this.authService.actualizarPerfil(datosActualizados).subscribe(
+        (success) => {
+          if (success) {
+            console.log('Perfil actualizado con éxito');
+            alert("Información personal actualizada correctamente.");
+            // Actualizar el usuarioActual en el componente
+            this.usuarioActual = this.authService.getUsuarioActual();
+          } else {
+            console.log('Error al actualizar el perfil');
+            alert("Hubo un error al actualizar la información.");
+          }
+        },
+        (error) => {
+          console.error('Error al actualizar el perfil:', error);
+          alert("Ocurrió un error al actualizar la información. Por favor, inténtalo de nuevo.");
+        }
+      );
     }
   }
 
@@ -96,12 +108,22 @@ export class ModificarPerfilComponent implements OnInit {
   onSubmitPassword() {
     if (this.passwordForm.valid) {
       const newPassword = this.passwordForm.get('newPassword')?.value;
-      if (this.authService.actualizarContraseña(newPassword)) {
-        alert("Contraseña actualizada correctamente.");
-        this.passwordForm.reset();
-      } else {
-        alert("Hubo un error al actualizar la contraseña.");
-      }
+      this.authService.actualizarContraseña(newPassword).subscribe(
+        (success) => {
+          if (success) {
+            console.log('Contraseña actualizada con éxito');
+            alert("Contraseña actualizada correctamente.");
+            this.passwordForm.reset();
+          } else {
+            console.log('Error al actualizar la contraseña');
+            alert("Hubo un error al actualizar la contraseña.");
+          }
+        },
+        (error) => {
+          console.error('Error al actualizar la contraseña:', error);
+          alert("Ocurrió un error al actualizar la contraseña. Por favor, inténtalo de nuevo.");
+        }
+      );
     }
   }
 }
