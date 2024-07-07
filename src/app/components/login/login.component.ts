@@ -48,12 +48,20 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
 
-      if (this.authService.login(email, password)) {
-        alert("¡Inicio de sesión exitoso!");
-        this.router.navigate(['/']);
-      } else {
-        alert("Correo electrónico o contraseña incorrectos. Por favor, intenta nuevamente.");
-      }
+      this.authService.login(email, password).subscribe(
+        (success) => {
+          if (success) {
+            alert("¡Inicio de sesión exitoso!");
+            this.router.navigate(['/']);
+          } else {
+            alert("Correo electrónico o contraseña incorrectos. Por favor, intenta nuevamente.");
+          }
+        },
+        (error) => {
+          console.error('Error durante el inicio de sesión:', error);
+          alert("Ocurrió un error durante el inicio de sesión. Por favor, inténtalo de nuevo.");
+        }
+      );
     } else {
       Object.values(this.loginForm.controls).forEach(control => {
         if (control.invalid) {
