@@ -21,6 +21,8 @@ export class ManagerUsersComponent implements OnInit {
   editForm!: FormGroup;
   /** Usuario actualmente en edición */
   editingUser: any = null;
+  /** control visibilidad del modal */
+  isModalOpen: boolean = false;
 
   /**
    * Constructor del componente
@@ -63,6 +65,7 @@ export class ManagerUsersComponent implements OnInit {
       },
       (error) => {
         console.error('Error loading users:', error);
+        alert('Error al cargar los usuarios. Por favor, intenta nuevamente.');
       }
     );
   }
@@ -74,6 +77,7 @@ export class ManagerUsersComponent implements OnInit {
   editUser(usuario: any) {
     this.editingUser = usuario;
     this.editForm.patchValue(usuario);
+    this.isModalOpen = true;
   }
 
   /**
@@ -92,12 +96,12 @@ export class ManagerUsersComponent implements OnInit {
             this.loadUsers();
             this.closeModal();
           } else {
-            alert('Error al actualizar el usuario');
+            alert('Error al actualizar el usuario. Por favor, intenta nuevamente.');
           }
         },
         (error) => {
           console.error('Error updating user:', error);
-          alert('Error al actualizar el usuario');
+          alert('Error al actualizar el usuario. Por favor, intenta nuevamente.');
         }
       );
     } else {
@@ -110,10 +114,39 @@ export class ManagerUsersComponent implements OnInit {
   }
 
   /**
+   * Maneja la eliminacion de un usuario
+   */
+  deleteUser(usuario: any) {
+    if (usuario.rol === 'administrador') {
+      alert('No se puede eliminar un usuario administrador.');
+      return;
+    }
+
+    if (confirm(`¿Estás seguro de que quieres eliminar al usuario ${usuario.nombre}?`)) {
+      this.authService.eliminarUsuario(usuario.email).subscribe(
+        (success) => {
+          if (success) {
+            alert('Usuario eliminado correctamente');
+            this.loadUsers();
+          } else {
+            alert('Error al eliminar el usuario');
+          }
+        },
+        (error) => {
+          console.error('Error deleting user:', error);
+          alert('Error al eliminar el usuario');
+        }
+      );
+    }
+  }
+
+  /**
    * Cierra el modal de edición
    */
   closeModal() {
+    this.isModalOpen = false;
     this.editingUser = null;
+    this.editForm.reset();
   }
 
   /**

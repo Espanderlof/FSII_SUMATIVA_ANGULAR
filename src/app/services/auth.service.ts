@@ -348,20 +348,59 @@ export class AuthService {
    */
   actualizarUsuario(usuario: any): Observable<boolean> {
     return this.jsonService.getJsonUsuariosData().pipe(
-      map(usuarios => {
+      switchMap(usuarios => {
         const index = usuarios.findIndex((u: any) => u.email === usuario.email);
         if (index !== -1) {
-          usuarios[index] = usuario;
-          this.jsonService.MetodoUsuarios(usuarios);
-          return true;
+          usuarios[index] = { ...usuarios[index], ...usuario };
+          return this.jsonService.MetodoUsuarios(usuarios).pipe(
+            map(() => {
+              console.log('Usuario actualizado correctamente');
+              return true;
+            }),
+            catchError(error => {
+              console.error('Error al actualizar usuario en Firebase:', error);
+              return of(false);
+            })
+          );
         }
-        return false;
+        return of(false);
       }),
       catchError(error => {
-        console.error('Error updating user:', error);
+        console.error('Error al obtener usuarios:', error);
         return of(false);
       })
     );
   }
+
+  /**
+   * elimina un usuario
+   * @param email Email del usuario a eliminar
+   * @returns true si la eliminación es exitosa, false en caso contrario
+   */
+  eliminarUsuario(email: string): Observable<boolean> {
+    return this.jsonService.getJsonUsuariosData().pipe(
+      switchMap(usuarios => {
+        const index = usuarios.findIndex((u: any) => u.email === email);
+        if (index !== -1) {
+          usuarios.splice(index, 1);
+          return this.jsonService.MetodoUsuarios(usuarios).pipe(
+            map(() => {
+              console.log('Usuario eliminado correctamente');
+              return true;
+            }),
+            catchError(error => {
+              console.error('Error al eliminar usuario en Firebase:', error);
+              return of(false);
+            })
+          );
+        }
+        return of(false);
+      }),
+      catchError(error => {
+        console.error('Error al obtener usuarios:', error);
+        return of(false);
+      })
+    );
+  }  
 
 }
