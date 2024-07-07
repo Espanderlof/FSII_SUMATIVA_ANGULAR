@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { By } from '@angular/platform-browser';
+import { of } from 'rxjs';
 
 describe('RegistrarmeComponent', () => {
   let component: RegistrarmeComponent;
@@ -53,7 +54,7 @@ describe('RegistrarmeComponent', () => {
 
     expect(form.valid).toBeTrue();
 
-    authServiceSpy.registrarUsuario.and.returnValue(true);
+    authServiceSpy.registrarUsuario.and.returnValue(of(true));
     component.onSubmit();
 
     expect(authServiceSpy.registrarUsuario).toHaveBeenCalled();

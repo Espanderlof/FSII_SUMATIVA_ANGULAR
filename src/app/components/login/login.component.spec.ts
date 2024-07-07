@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Component } from '@angular/core';
+import { of } from 'rxjs';
 
 /** Componente mock para las rutas */
 @Component({selector: 'app-mock', template: ''})
@@ -74,7 +75,7 @@ describe('LoginComponent', () => {
 
     expect(form.valid).toBeTrue();
 
-    authServiceSpy.login.and.returnValue(true);
+    authServiceSpy.login.and.returnValue(of(true));
     component.onSubmit();
 
     expect(authServiceSpy.login).toHaveBeenCalledWith('test@example.com', 'correctPassword');
@@ -104,7 +105,7 @@ describe('LoginComponent', () => {
 
     expect(form.valid).toBeTrue();
 
-    authServiceSpy.login.and.returnValue(false);
+    authServiceSpy.login.and.returnValue(of(false));
     
     spyOn(window, 'alert');
     component.onSubmit();
