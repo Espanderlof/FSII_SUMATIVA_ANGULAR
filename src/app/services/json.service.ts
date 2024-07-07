@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class JsonService {
+  private apiUrl = environment.apiUrl;
   /**
    * Opciones de cabecera para las peticiones HTTP a la API de categorias
    */
@@ -18,7 +21,7 @@ export class JsonService {
   /**
    * URL de la API de categorias
    */
-  private jsonCategoriasUrl = '/api/v0/b/fsii-sumativa-angular.appspot.com/o/categorias.json?alt=media&token=80759020-58e2-44d2-b8b7-c4770cc93d76'; 
+  private jsonCategoriasUrl = `${this.apiUrl}/v0/b/fsii-sumativa-angular.appspot.com/o/categorias.json?alt=media&token=80759020-58e2-44d2-b8b7-c4770cc93d76`; 
 
   /**
    * Opciones de cabecera para las peticiones HTTP a la API de productos
@@ -32,7 +35,7 @@ export class JsonService {
   /**
    * URL de la API de productos
    */
-  private jsonProductosUrl = '/api/v0/b/fsii-sumativa-angular.appspot.com/o/productos.json?alt=media&token=fd5435c0-e522-4ae8-a7eb-e977e471cce7';
+  private jsonProductosUrl = `${this.apiUrl}/v0/b/fsii-sumativa-angular.appspot.com/o/productos.json?alt=media&token=fd5435c0-e522-4ae8-a7eb-e977e471cce7`;
 
   /**
    * Opciones de cabecera para las peticiones HTTP a la API de usuarios
@@ -46,7 +49,7 @@ export class JsonService {
   /**
    * URL de la API de usuarios
    */
-  private jsonUsuariosUrl = '/api/v0/b/fsii-sumativa-angular.appspot.com/o/usuarios.json?alt=media&token=f11c237d-cda1-41f9-924e-02cfbe260069';
+  private jsonUsuariosUrl = `${this.apiUrl}/v0/b/fsii-sumativa-angular.appspot.com/o/usuarios.json?alt=media&token=f11c237d-cda1-41f9-924e-02cfbe260069`;
 
   constructor(private http: HttpClient) { }
 
