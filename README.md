@@ -5,6 +5,7 @@ DOCKER COMANDOS
 - docker build -t albavets .
 - docker run -p 80:80 albavets
 
+--------------------------------------------------------------------------
 
 COMPODOC COMANDOS
 - Comando para generar documentacion: npx compodoc -p tsconfig.json
