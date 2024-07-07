@@ -59,13 +59,6 @@ export class AuthService {
    * Obtiene el usuario actual
    * @returns El usuario actual o null si no hay sesión
    */
-  // getUsuarioActual(): any {
-  //   if (this.isBrowser) {
-  //     const sesionUsuarioJSON = localStorage.getItem('sesionUsuario');
-  //     return sesionUsuarioJSON ? JSON.parse(sesionUsuarioJSON) : null;
-  //   }
-  //   return null;
-  // }
   getUsuarioActual(): any {
     return this.usuarioActual.value;
   }
