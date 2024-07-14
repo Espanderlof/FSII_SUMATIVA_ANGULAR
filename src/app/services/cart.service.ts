@@ -121,4 +121,11 @@ export class CartService {
   getCartItemCount() {
     return this.cartItemCount.asObservable();
   }
+
+  clearCart() {
+    if (this.isBrowser) {
+      localStorage.removeItem('cart');
+      this.cartItemCount.next(0);
+    }
+  }
 }

@@ -126,15 +126,8 @@ export class JsonService {
     /**
    * Sobrescribe el archivo JSON de pedidos
    */
-    MetodoPedidos(listaPedidos:any) {
-      console.log(listaPedidos);
-      this.http.post(this.jsonProductosUrl, listaPedidos, this.httpOptionsPedidos).subscribe(
-        response => {
-          console.log('Archivo JSON sobrescrito con exito', response);
-        },
-        error => {
-          console.error('Error al sobrescribir el archivo JSON', error);
-        })
+    MetodoPedidos(listaPedidos: any): Observable<any> {
+      return this.http.post(this.jsonPedidosUrl, listaPedidos, this.httpOptionsPedidos);
     }
   
     /**

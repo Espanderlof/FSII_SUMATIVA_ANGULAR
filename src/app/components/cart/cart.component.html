@@ -27,5 +27,8 @@
     </table>
     <div class="text-end">
         <h4>Total: ${{ total }}</h4>
+        <button class="btn btn-primary mt-3" (click)="procesarPago()" [disabled]="cartItems.length === 0">
+            Pagar
+        </button>
     </div>
 </div>
