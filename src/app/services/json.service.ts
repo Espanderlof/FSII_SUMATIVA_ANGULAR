@@ -123,17 +123,17 @@ export class JsonService {
     return this.http.post(this.jsonUsuariosUrl, listaUsuarios, this.httpOptionsUsuarios);
   }
 
-    /**
-   * Sobrescribe el archivo JSON de pedidos
+  /**
+ * Sobrescribe el archivo JSON de pedidos
+ */
+  MetodoPedidos(listaPedidos: any): Observable<any> {
+    return this.http.post(this.jsonPedidosUrl, listaPedidos, this.httpOptionsPedidos);
+  }
+
+  /**
+   * Trae todos los pedidos del archivo JSON
    */
-    MetodoPedidos(listaPedidos: any): Observable<any> {
-      return this.http.post(this.jsonPedidosUrl, listaPedidos, this.httpOptionsPedidos);
-    }
-  
-    /**
-     * Trae todos los pedidos del archivo JSON
-     */
-    getJsonPedidosData(): Observable<any> {
-      return this.http.get(this.jsonPedidosUrl);
-    }
+  getJsonPedidosData(): Observable<any> {
+    return this.http.get(this.jsonPedidosUrl);
+  }
 }

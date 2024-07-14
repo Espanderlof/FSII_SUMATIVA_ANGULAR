@@ -84,6 +84,9 @@ export class CartComponent implements OnInit {
     this.total = this.cartItems.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
   }
 
+  /**
+   * Procesa el pago del carrito
+   */
   procesarPago() {
     const usuarioActual = this.authService.getUsuarioActual();
     if (!usuarioActual) {

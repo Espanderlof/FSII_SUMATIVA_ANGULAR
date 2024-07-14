@@ -122,6 +122,9 @@ export class CartService {
     return this.cartItemCount.asObservable();
   }
 
+  /**
+   * Limpia el carrito
+   */
   clearCart() {
     if (this.isBrowser) {
       localStorage.removeItem('cart');

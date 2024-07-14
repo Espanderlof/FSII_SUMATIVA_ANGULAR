@@ -347,6 +347,9 @@
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;;
 import { CartService } from &#x27;../../services/cart.service&#x27;;
+import { JsonService } from &#x27;../../services/json.service&#x27;;
+import { AuthService } from &#x27;../../services/auth.service&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
 
 /**  
  * Interfaz que define la estructura de un ítem del carrito 
@@ -385,7 +388,12 @@ export class CartComponent implements OnInit {
    * Constructor del componente
    * @param cartService Servicio para manejar las operaciones del carrito
    */
-  constructor(private cartService: CartService) { }
+  constructor(
+    private cartService: CartService,
+    private jsonService: JsonService,
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   /** Método de inicialización del componente */
   ngOnInit() {
@@ -419,6 +427,47 @@ export class CartComponent implements OnInit {
   /** Actualiza el total del carrito */
   private updateTotal() {
     this.total &#x3D; this.cartItems.reduce((sum, item) &#x3D;&gt; sum + item.precio * item.cantidad, 0);
+  }
+
+  /**
+   * Procesa el pago del carrito
+   */
+  procesarPago() {
+    const usuarioActual &#x3D; this.authService.getUsuarioActual();
+    if (!usuarioActual) {
+      alert(&#x27;Debes iniciar sesión para realizar un pedido.&#x27;);
+      return;
+    }
+
+    this.jsonService.getJsonPedidosData().subscribe(
+      (pedidos: any[]) &#x3D;&gt; {
+        const nuevoId &#x3D; pedidos.length &gt; 0 ? Math.max(...pedidos.map(p &#x3D;&gt; p.id)) + 1 : 1;
+        const nuevoPedido &#x3D; {
+          id: nuevoId,
+          fecha: new Date().toISOString(),
+          usuario: usuarioActual.email,
+          productos: this.cartItems,
+          total: this.total
+        };
+
+        pedidos.push(nuevoPedido);
+        this.jsonService.MetodoPedidos(pedidos).subscribe(
+          () &#x3D;&gt; {
+            alert(&#x27;Pago procesado correctamente&#x27;);
+            this.cartService.clearCart();
+            this.router.navigate([&#x27;/pedidos&#x27;]);
+          },
+          error &#x3D;&gt; {
+            console.error(&#x27;Error al procesar el pago:&#x27;, error);
+            alert(&#x27;Hubo un error al procesar el pago. Por favor, intenta de nuevo.&#x27;);
+          }
+        );
+      },
+      error &#x3D;&gt; {
+        console.error(&#x27;Error al obtener los pedidos:&#x27;, error);
+        alert(&#x27;Hubo un error al procesar el pago. Por favor, intenta de nuevo.&#x27;);
+      }
+    );
   }
 }
 </code></pre>

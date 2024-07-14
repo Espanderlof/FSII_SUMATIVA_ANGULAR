@@ -35,6 +35,9 @@ export class PedidosComponent implements OnInit {
     }
   }
 
+  /**
+   * Carga los pedidos del usuario actual
+   */
   cargarPedidos(): void {
     this.jsonService.getJsonPedidosData().subscribe(
       (data: any[]) => {
