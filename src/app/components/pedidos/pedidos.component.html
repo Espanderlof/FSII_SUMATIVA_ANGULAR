@@ -1,0 +1,41 @@
+<div class="container mt-4 mb-4">
+    <h2 class="mb-4">Mis Pedidos</h2>
+
+    <div *ngIf="cargando" class="text-center">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+        </div>
+        <p class="mt-2">Cargando pedidos...</p>
+    </div>
+
+    <div *ngIf="error" class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+
+    <div *ngIf="!cargando && !error">
+        <div *ngIf="pedidos.length === 0" class="alert alert-info" role="alert">
+            No tienes pedidos realizados.
+        </div>
+
+        <div class="row">
+            <div *ngFor="let pedido of pedidos" class="col-12 mb-2">
+                <div class="card h-100">
+                    <div class="card-header bg-card-primary text-white">
+                        <h5 class="card-title mb-0 text-white">Pedido #{{ pedido.id }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"><strong>Fecha:</strong> {{ pedido.fecha | date:'dd/MM/yyyy' }}</p>
+                        <p class="card-text"><strong>Total:</strong> {{ pedido.total |
+                            currency:'CLP':'symbol-narrow':'1.0-0' }}</p>
+                        <h6 class="card-subtitle mb-2 text-muted">Productos:</h6>
+                        <ul class="list-group list-group-flush">
+                            <li *ngFor="let producto of pedido.productos" class="list-group-item">
+                                {{ producto.nombre }} - Cantidad: {{ producto.cantidad }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -51,6 +51,20 @@ export class JsonService {
    */
   private jsonUsuariosUrl = `${this.apiUrl}/v0/b/fsii-sumativa-angular.appspot.com/o/usuarios.json?alt=media&token=f11c237d-cda1-41f9-924e-02cfbe260069`;
 
+  /**
+   * Opciones de cabecera para las peticiones HTTP a la API de pedidos
+   */
+  httpOptionsPedidos = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer f1ea3b95-e90d-46f8-b31f-9e5879b90a31'
+    })
+  }
+  /**
+   * URL de la API de pedidos
+   */
+  private jsonPedidosUrl = `${this.apiUrl}/v0/b/fsii-sumativa-angular.appspot.com/o/pedidos.json?alt=media&token=f1ea3b95-e90d-46f8-b31f-9e5879b90a31`;
+
   constructor(private http: HttpClient) { }
 
   /**
@@ -108,4 +122,25 @@ export class JsonService {
   MetodoUsuarios(listaUsuarios: any): Observable<any> {
     return this.http.post(this.jsonUsuariosUrl, listaUsuarios, this.httpOptionsUsuarios);
   }
+
+    /**
+   * Sobrescribe el archivo JSON de pedidos
+   */
+    MetodoPedidos(listaPedidos:any) {
+      console.log(listaPedidos);
+      this.http.post(this.jsonProductosUrl, listaPedidos, this.httpOptionsPedidos).subscribe(
+        response => {
+          console.log('Archivo JSON sobrescrito con exito', response);
+        },
+        error => {
+          console.error('Error al sobrescribir el archivo JSON', error);
+        })
+    }
+  
+    /**
+     * Trae todos los pedidos del archivo JSON
+     */
+    getJsonPedidosData(): Observable<any> {
+      return this.http.get(this.jsonPedidosUrl);
+    }
 }

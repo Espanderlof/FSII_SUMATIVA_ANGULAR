@@ -1,0 +1,71 @@
+[
+    {
+      "id": 1,
+      "fecha": "2024-07-14",
+      "usuario": "jzapata@crell.cl",
+      "productos": [
+        {
+          "id": 1,
+          "nombre": "Plato antianciedad",
+          "descripcion": "Plato antianciedad para perros y gatos. Ayuda a evitar la ansiedad en la comida.",
+          "imagen": "1.jpg",
+          "precio": 6500,
+          "categoria": 3,
+          "cantidad": 1
+        },
+        {
+          "id": 2,
+          "nombre": "Collar pañuelo",
+          "descripcion": "Collar pañuelo para perros. Collar ajustable con pañuelo desmontable.",
+          "imagen": "2.jpg",
+          "precio": 4500,
+          "categoria": 1,
+          "cantidad": 1
+        }
+      ],
+      "total": 11000
+    },
+    {
+      "id": 2,
+      "fecha": "2024-07-14",
+      "usuario": "jzapata@crell.cl",
+      "productos": [
+        {
+          "id": 3,
+          "nombre": "Correa reflectante",
+          "descripcion": "Correa reflectante para perros. Correa ajustable con costuras reflectantes.",
+          "imagen": "3.jpg",
+          "precio": 5500,
+          "categoria": 2,
+          "cantidad": 1
+        }
+      ],
+      "total": 5500
+    },
+    {
+      "id": 3,
+      "fecha": "2024-07-14",
+      "usuario": "jzapata@crell.cl",
+      "productos": [
+        {
+          "id": 1,
+          "nombre": "Plato antianciedad",
+          "descripcion": "Plato antianciedad para perros y gatos. Ayuda a evitar la ansiedad en la comida.",
+          "imagen": "1.jpg",
+          "precio": 6500,
+          "categoria": 3,
+          "cantidad": 1
+        },
+        {
+          "id": 3,
+          "nombre": "Correa reflectante",
+          "descripcion": "Correa reflectante para perros. Correa ajustable con costuras reflectantes.",
+          "imagen": "3.jpg",
+          "precio": 5500,
+          "categoria": 2,
+          "cantidad": 1
+        }
+      ],
+      "total": 12000
+    }
+  ]
